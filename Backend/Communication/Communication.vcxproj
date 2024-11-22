@@ -19,15 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algo.h" />
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="ConnectionList.h" />
     <ClInclude Include="ConsoleLog.h" />
+    <ClInclude Include="HttpReader.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="Message.h" />
-    <ClInclude Include="RequestHeaders.h" />
+    <ClInclude Include="MessageReader.h" />
+    <ClInclude Include="HttpHeaders.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="TsQueue.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="ConnectionList.cpp" />
+    <ClCompile Include="HttpReader.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

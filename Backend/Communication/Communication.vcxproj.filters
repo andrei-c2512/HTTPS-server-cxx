@@ -13,15 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\MessageHandling">
+      <UniqueIdentifier>{86edbe0e-d499-41ef-8eb4-abc200b41c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MessageHandling">
+      <UniqueIdentifier>{ab98a9b9-5c6f-4fb5-84e1-f88c2e53bbcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MessageHandling\Read">
+      <UniqueIdentifier>{d4397e96-334a-450c-89cb-29704ddb9d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MessageHandling\Write">
+      <UniqueIdentifier>{cc1e07e2-e3d9-41c8-b11b-ae294883d843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MessageHandling\Write">
+      <UniqueIdentifier>{3cd40744-8b43-4a9e-add4-12e0f6be196f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MessageHandling\Read">
+      <UniqueIdentifier>{5aabcb9d-5443-43ab-82d1-784715705e2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HttpRequest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TsQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RequestHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h">
@@ -30,16 +42,43 @@
     <ClInclude Include="Connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConsoleLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConnectionList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpHeaders.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageReader.h">
+      <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpReader.h">
+      <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpRequest.h">
+      <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HttpRequest.cpp">
+    <ClCompile Include="Connection.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpRequest.cpp">
+      <Filter>Source Files\MessageHandling\Read</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpReader.cpp">
+      <Filter>Source Files\MessageHandling\Read</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

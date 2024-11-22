@@ -1,1 +1,319 @@
-﻿
+﻿  Application.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+  HttpServer.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(10,21): error C2059: syntax error: '('
+  (compiling source file 'Application.cpp')
+      C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(10,21):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(8,7):
+          while compiling class template 'TsQueue'
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(11,37): error C2143: syntax error: missing ')' before ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(11,1): error C2059: syntax error: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(30,10): error C2065: 'lock': undeclared identifier
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): message : error recovery skipped: ')'
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\HttpRequest.h(2,10): error C1083: Cannot open include file: 'rapidjson/document.h': No such file or directory
+  (compiling source file 'Application.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(10,21): error C2059: syntax error: '('
+  (compiling source file 'HttpServer.cpp')
+      C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(10,21):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(8,7):
+          while compiling class template 'TsQueue'
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(11,37): error C2143: syntax error: missing ')' before ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(11,1): error C2059: syntax error: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(13,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(17,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(21,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(25,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(29,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(30,10): error C2065: 'lock': undeclared identifier
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(33,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(37,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(41,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,20): error C3878: syntax error: unexpected token 'lock' following 'expression'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,20): message : error recovery skipped: 'identifier ( identifier'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): error C2760: syntax error: ')' was unexpected here; expected ';'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): error C3878: syntax error: unexpected token ')' following 'expression_statement'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\TsQueue.h(47,29): message : error recovery skipped: ')'
+  (compiling source file 'HttpServer.cpp')
+  
+C:\Users\Andrei C\AndroidStudioProjects\MeditationApp\Backend\Communication\HttpRequest.h(2,10): error C1083: Cannot open include file: 'rapidjson/document.h': No such file or directory
+  (compiling source file 'HttpServer.cpp')
+  
+  Generating Code...

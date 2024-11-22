@@ -3,6 +3,7 @@
 #include "TsQueue.h"
 #include "HttpRequest.h"
 #include <iostream>
+#include "ConnectionList.h"
 
 class HttpServer {
 public:
@@ -10,10 +11,14 @@ public:
 	void start();
 	void stop();
 
-	void waitForConnections();
+	void listen();
+	void update();
+
 private:
 	asio::io_context asioContext;
 	std::thread contextThread;
 
 	asio::ip::tcp::acceptor asioAcceptor;
+	TsQueue<std::shared_ptr<Message>> readQueue;
+	ConnectionList list;
 };
