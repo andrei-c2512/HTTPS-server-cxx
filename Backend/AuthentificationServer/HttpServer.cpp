@@ -1,8 +1,7 @@
 #include "HttpServer.h"
 #include "ConsoleLog.h"
 
-std::string serverTag = "[SERVER]";
-std::string errorTag = "[ERROR]";
+
 
 HttpServer::HttpServer(int16_t port) 
 	:asioAcceptor(asioContext , asio::ip::tcp::endpoint(asio::ip::tcp::v4() , port))

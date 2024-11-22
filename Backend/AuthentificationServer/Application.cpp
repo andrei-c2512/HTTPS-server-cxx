@@ -3,11 +3,9 @@
 
 int main()
 {
-	//HttpServer server;
-	//server.start();
+	HttpServer server;
+	server.start();
 
-	int cout;
-	
 
 	return 0;
 }

@@ -51,7 +51,7 @@
     <ClInclude Include="Algo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HttpHeaders.h">
+    <ClInclude Include="RequestHeaders.h">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
     <ClInclude Include="Message.h">
@@ -65,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="HttpRequest.h">
       <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

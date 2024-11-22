@@ -29,7 +29,6 @@ int32_t HttpRequest::extractHeaders(const std::string& str, int32_t start) {
 	while (ch != startOfJson) {
 		//i would use std::istringstream to read line by line but I don't want to make a copy of the string
 		std::string line = StringHelper::nextLine(str, start);
-		start += line.size();
 	}
 
 	return start;
