@@ -2,8 +2,7 @@
 #include "TsQueue.h"
 #include "asio.hpp"
 #include "Message.h"
-#include "MessageReader.h"
-
+#include "HttpReader.h"
 class Connection {
 public:
 	enum class Type {
@@ -12,8 +11,7 @@ public:
 		Https
 	};
 public:
-	Connection(asio::io_context& context0 , asio::ip::tcp::socket socket0 , TsQueue<std::shared_ptr<Message>>& queue , Type type);
-	~Connection();
+	Connection(asio::io_context& context0 , asio::ip::tcp::socket socket0 , TsQueue<std::shared_ptr<Message>>& queue);
 	Connection& operator=(const Connection&) = delete;
 	Connection(const Connection&) = delete;
 public:
@@ -24,23 +22,16 @@ public:
 
 	int32_t id() const noexcept;
 	//listens for data
-	void listen();
+	virtual void listen() = 0;
 public:
 	void write(std::shared_ptr<Message> msg);
-	void read(std::shared_ptr<Message> msg);
-private:
-	void initMsgReader();
 protected:
-	Type type;
-	MessageReader* messageReader;
-
+	virtual void initMsgReader() = 0;
+protected:
 	asio::ip::tcp::socket socket;
 	asio::io_context& context;
 	TsQueue<std::shared_ptr<Message>> writeQueue;
 	TsQueue<std::shared_ptr<Message>>& readQueue;
 
-	std::string unfinishedMessage;
 	int32_t _id;
-
-
 };

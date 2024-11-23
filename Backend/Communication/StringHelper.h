@@ -29,5 +29,23 @@ namespace StringHelper {
 		}
 		return {};
 	}
+	std::vector<ByteArray> toByteArrayVec(const std::vector<std::string>& vec) {
+		std::vector<ByteArray> newVec(vec.size());
+
+		for (auto i = 0; i < vec.size(); i++) {
+			newVec[i] = ByteArray(vec[i].begin(), vec[i].end());
+		}
+		return newVec;
+	}
+
+	int32_t toString(const ByteArray& arr) {
+		int32_t num = 0;
+		for (char c : arr) {
+			assert(c >= '0' && c <= '9');
+
+			num = num * 10 + int32_t(c - '0');
+		}
+		return num;
+	}
 }
 			

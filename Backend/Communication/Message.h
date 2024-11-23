@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include "Common.h"
 
 class Message {
 public:
@@ -10,5 +10,5 @@ public:
 	};
 public:
 	Message() = default;
-	virtual std::string toString() const {}
+	virtual ByteArray toByteArray() const {}
 };

@@ -7,7 +7,7 @@
 template<typename T>
 class TsQueue {
 public:
-	TsQueue() = default();
+	TsQueue() = default;
 	TsQueue(const TsQueue<T>&) = delete;
 	const T& front() {
 		std::scoped_lock lock(mDeq);

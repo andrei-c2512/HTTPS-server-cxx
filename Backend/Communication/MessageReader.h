@@ -5,5 +5,5 @@
 class MessageReader {
 public:
 	MessageReader() = default;
-	virtual void start(asio::ip::tcp::socket& socket);
+	virtual bool start(asio::ip::tcp::socket& socket) = 0;
 };

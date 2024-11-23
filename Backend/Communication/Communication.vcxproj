@@ -19,24 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractServer.h" />
     <ClInclude Include="Algo.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Connection.h" />
-    <ClInclude Include="ConnectionList.h" />
+    <ClInclude Include="HttpServer.h" />
+    <ClInclude Include="ServerConnectionList.h" />
     <ClInclude Include="ConsoleLog.h" />
+    <ClInclude Include="HttpClientConnection.h" />
     <ClInclude Include="HttpReader.h" />
     <ClInclude Include="HttpRequest.h" />
+    <ClInclude Include="HttpServerConnection.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageReader.h" />
-    <ClInclude Include="RequestHeaders.h" />
+    <ClInclude Include="HttpCommon.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="TsQueue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="ConnectionList.cpp" />
+    <ClCompile Include="HttpCommon.cpp" />
+    <ClCompile Include="ServerConnectionList.cpp" />
+    <ClCompile Include="HttpClientConnection.cpp" />
     <ClCompile Include="HttpReader.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
+    <ClCompile Include="HttpServerConnection.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -135,6 +142,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

@@ -3,16 +3,9 @@
 
 Connection::Connection(asio::io_context& context0, 
 	asio::ip::tcp::socket socket0 , 
-	TsQueue<std::shared_ptr<Message>>& queue ,
-	Connection::Type type0)
-	:context(context0) , socket(std::move(socket0)) , readQueue(queue) ,type(type0)
-{
-
-}
-
-Connection::~Connection() {
-	delete messageReader;
-}
+	TsQueue<std::shared_ptr<Message>>& queue)
+	:context(context0) , socket(std::move(socket0)) , readQueue(queue) 
+{}
 
 bool Connection::connect(const std::string& host, int16_t port) {
 	try {
@@ -32,21 +25,6 @@ bool Connection::connect(const std::string& host, int16_t port) {
 	}
 }
 
-void Connection::initMsgReader() {
-	switch (type) {
-	case Type::TCP:
-		break;
-	case Type::Http:
-		break;
-	case Type::Https:
-		break;
-	}
-}
-
-//listens for data
-void Connection::listen() {
-	messageReader->start(socket);
-}
 
 bool Connection::disconnect() {
 	return false;
