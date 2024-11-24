@@ -110,5 +110,8 @@
     <ClCompile Include="HttpCommon.cpp">
       <Filter>Source Files\MessageHandling</Filter>
     </ClCompile>
+    <ClCompile Include="ConsoleLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

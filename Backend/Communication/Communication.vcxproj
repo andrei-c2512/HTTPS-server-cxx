@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="ConsoleLog.cpp" />
     <ClCompile Include="HttpCommon.cpp" />
     <ClCompile Include="ServerConnectionList.cpp" />
     <ClCompile Include="HttpClientConnection.cpp" />
@@ -98,7 +99,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\libraries\rapidjson-master\include;C:\libraries\asio-1.30.2\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)rapidjson-master\include\rapidjson;$(SolutionDir)asio-1.30.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -143,6 +144,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)asio-1.30.2\include;$(SolutionDir)rapidjson-master\include\rapidjson</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

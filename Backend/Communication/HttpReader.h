@@ -1,5 +1,5 @@
 #pragma once
-#include "rapidjson/document.h"
+#include "document.h"
 #include "MessageReader.h"
 #include "Common.h"
 #include "HttpCommon.h"

@@ -1,8 +1,8 @@
 #pragma once
-#include "rapidjson/document.h"
 #include "Message.h"
 #include "Common.h"
 #include "HttpCommon.h"
+#include "document.h"
 
 class HttpRequest : public Message{
 public:

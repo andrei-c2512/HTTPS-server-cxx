@@ -3,8 +3,8 @@
 
 int main()
 {
-	HttpServer server;
-	server.start();
+	//HttpServer server(3756);
+	//server.start();
 
 
 	return 0;

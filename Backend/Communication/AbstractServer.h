@@ -32,8 +32,8 @@ public:
 	}
 
 	void listen() {
-		asioAcceptor.async_accept(
-			[this](std::error_code ec, asio::ip::tcp::socket& socket) {
+		asioAcceptor.async_accept( 
+			[this](std::error_code ec, asio::ip::tcp::socket socket) {
 				if (!ec) {
 					ConsoleLog::message("New connection");
 					std::shared_ptr<HttpServerConnection> conn = std::make_shared<HttpServerConnection>(asioContext, std::move(socket), readQueue);
