@@ -63,9 +63,6 @@
     <ClInclude Include="HttpReader.h">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
-    <ClInclude Include="HttpRequest.h">
-      <Filter>Header Files\MessageHandling\Read</Filter>
-    </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,31 +84,23 @@
     <ClInclude Include="AbstractServer.h">
       <Filter>Header Files\Connection</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="HttpRequest.cpp">
-      <Filter>Source Files\MessageHandling\Read</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpReader.cpp">
-      <Filter>Source Files\MessageHandling\Read</Filter>
-    </ClCompile>
-    <ClCompile Include="Connection.cpp">
-      <Filter>Source Files\Connection</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpServerConnection.cpp">
-      <Filter>Source Files\Connection</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpClientConnection.cpp">
-      <Filter>Source Files\Connection</Filter>
-    </ClCompile>
-    <ClCompile Include="ServerConnectionList.cpp">
-      <Filter>Source Files\Connection</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpCommon.cpp">
-      <Filter>Source Files\MessageHandling</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleLog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="AbstractClient.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpResponseReader.h">
+      <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpRequestReader.h">
+      <Filter>Header Files\MessageHandling\Read</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpMessage.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpRequest.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpResponse.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

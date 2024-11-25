@@ -1,35 +1,58 @@
 #pragma once
-#include "Message.h"
-#include "Common.h"
-#include "HttpCommon.h"
-#include "document.h"
+#include "HttpMessage.h"
 
-class HttpRequest : public Message{
+
+class HttpRequest : public HttpMessage {
 public:
-	HttpRequest(const std::string& str);
-	HttpRequest(HttpVerb v, const ByteArray& URI0, const ByteArray& version0, 
-		const std::map<ByteArray,ByteArray>& headers, std::unique_ptr<rapidjson::Document> d0);
+	HttpRequest(const std::string& str)
+		:HttpMessage(str)
+	{
+		/*int32_t i = 0;
+		int32_t strCursor = 0;
+		int32_t last = 0;
+
+		char breakChar = ' ';
+		for (; strCursor < str.size(); strCursor++) {
+			if (str[strCursor] == breakChar)
+			{
+				reqTypeStorage[i] = str.substr(last, i - last);
+				last = i + 1;
+				i++;
+				if (i == 2)
+					breakChar = '\n';
+				else if (i == 3)
+					break;
+			}
+		}
+		extractHeaders(str, strCursor);*/
+	}
+	HttpRequest(HttpVerb v, const ByteArray& URI0, HttpVersion version0,
+		const std::map<ByteArray, ByteArray>& headers0, std::unique_ptr<rapidjson::Document> d0)
+		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(version0)
+	{}
 
 
-	HttpVerb verb() const noexcept;
-	ByteArray URI() const noexcept;
-	/*
+	HttpVerb verb() const noexcept { return _verb; }
+	ByteArray URI() const noexcept { return _URI; }
+	HttpVersion version() const noexcept { return _version; }
+	
 	std::string scheme() const noexcept;
 	std::string server() const noexcept;
-	std::string path() const noexcept;*/
-	ByteArray version() const noexcept;
-	const rapidjson::Document& document() const noexcept;
+	std::string path() const noexcept;
+protected:
+	void processFirstLine(const std::string& line) override {
+
+	}
 private:
-	/*void extractMethod();
+	void extractMethod();
 	void extractUrl();
 	void extractScheme();
 	void extractServer();
 	void extractPath();
-	int32_t extractHeaders(const std::string& str, int32_t start);*/
+	int32_t extractHeaders(const std::string& str, int32_t start);
 private:
 	HttpVerb _verb;
 	ByteArray _URI;
-	ByteArray _version;
-	std::map<ByteArray, ByteArray> headers;
-	std::unique_ptr<rapidjson::Document> doc;
+	HttpVersion _version;
 };
+

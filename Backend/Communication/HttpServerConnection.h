@@ -1,21 +1,33 @@
 #pragma once
-#include "asio.hpp"
-#include "TsQueue.h"
-#include "HttpRequest.h"
-#include <iostream>
+#include "HttpMessage.h"
 #include "Connection.h"
-
+#include "HttpRequestReader.h"
 
 //if you are a server and want to handle connections from clients , use this
 //this one is ready to read incoming requests(since servers respond to requests)
-class HttpServerConnection : public Connection {
+
+
+class HttpServerConnection : public Connection<HttpRequest> {
 public:
-	HttpServerConnection(asio::io_context& context0, asio::ip::tcp::socket socket0, TsQueue<std::shared_ptr<Message>>& queue);
-	void listen() override;
+	HttpServerConnection(asio::io_context& context0, asio::ip::tcp::socket socket0, TsQueue<std::shared_ptr<HttpRequest>>& queue)
+		:Connection<HttpRequest>(context0, std::move(socket0), queue)
+	{
+		reader = std::make_shared<HttpRequestReader>();
+	}
+	void listen() override {
+		asio::post(context, [this]() {
+			bool go = true;
+			while (go)
+			{
+				go = reader->start(socket);
+			}
+			//for error handling here maybe?
+
+			});
+	}
+	void writeMessage(std::shared_ptr<HttpRequest> msg) override {
+
+	}
 protected:
-	void initMsgReader() override;
-protected:
-	std::unique_ptr<MessageReader> reader;
+	std::shared_ptr<HttpRequestReader> reader;
 };
-
-

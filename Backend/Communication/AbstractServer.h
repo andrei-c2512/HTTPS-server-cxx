@@ -1,6 +1,8 @@
 #pragma once
 #include "Common.h"
 #include "ServerConnectionList.h"
+#include "ConsoleLog.h"
+
 
 template<typename connection, typename messageType>
 class AbstractServer {
@@ -8,12 +10,18 @@ public:
 	AbstractServer(int16_t port)
 		:asioAcceptor(asioContext, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
 	{}
-	void start() {
-		onStart();
+	virtual ~AbstractServer() {
+		onStop();
+		asioContext.stop();
 
+		if (contextThread.joinable()) contextThread.join();
+
+		//I would just call stop() but for some reason it causes a linker error here because of ConsoleLog ? tf
+	}
+	void start() {
 		try {
 			listen();
-
+			onStart();
 			contextThread = std::thread([this]() { asioContext.run();  });
 		}
 		catch (std::exception& e) {

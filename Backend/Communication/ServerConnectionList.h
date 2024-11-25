@@ -1,22 +1,26 @@
 #pragma once
-#include <vector>
-#include <list>
-#include <memory>
 #include "Connection.h"
+#include "ConsoleLog.h"
+
 
 template <typename T>
 class ServerConnectionList {
 public:
 	ServerConnectionList() = default;
 	bool add(std::shared_ptr<T> conn) {
-		auto it = std::lower_bound(list.begin(), list.end(), conn->id());
+		auto it = std::lower_bound(list.begin(), list.end(), conn->id(),
+			[](std::shared_ptr<T> l, int32_t val) {
+				return l->id() < val;
+			});
 		list.insert(it, conn);
+		return true;
 	}
 	//this one also gives it an id
 	bool addNew(std::shared_ptr<T> conn) {
 		conn->setId(nextId);
 		nextId++;
 		add(conn);
+		return true;
 	}
 	//this is still quite innefficient
 	void remove(int32_t id) {
@@ -77,3 +81,4 @@ private:
 	std::vector<std::shared_ptr<T>> list;
 	int32_t nextId = 0;
 };
+

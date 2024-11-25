@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CDN-meditationVideos", "CDN
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Communication", "Communication\Communication.vcxproj", "{39C9EA65-B323-4442-A4CD-FF944F6B4E76}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClientTest", "ClientTest\ClientTest.vcxproj", "{214812D7-A342-49F7-A186-62894A9151E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{39C9EA65-B323-4442-A4CD-FF944F6B4E76}.Release|x64.Build.0 = Release|x64
 		{39C9EA65-B323-4442-A4CD-FF944F6B4E76}.Release|x86.ActiveCfg = Release|Win32
 		{39C9EA65-B323-4442-A4CD-FF944F6B4E76}.Release|x86.Build.0 = Release|Win32
+		{214812D7-A342-49F7-A186-62894A9151E6}.Debug|x64.ActiveCfg = Debug|x64
+		{214812D7-A342-49F7-A186-62894A9151E6}.Debug|x64.Build.0 = Debug|x64
+		{214812D7-A342-49F7-A186-62894A9151E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{214812D7-A342-49F7-A186-62894A9151E6}.Debug|x86.Build.0 = Debug|Win32
+		{214812D7-A342-49F7-A186-62894A9151E6}.Release|x64.ActiveCfg = Release|x64
+		{214812D7-A342-49F7-A186-62894A9151E6}.Release|x64.Build.0 = Release|x64
+		{214812D7-A342-49F7-A186-62894A9151E6}.Release|x86.ActiveCfg = Release|Win32
+		{214812D7-A342-49F7-A186-62894A9151E6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

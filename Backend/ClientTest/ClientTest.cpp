@@ -1,8 +1,9 @@
-// Delivery Server.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// ClientTest.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
-//cuminca cu CDN
+
+
 int main()
 {
     std::cout << "Hello World!\n";

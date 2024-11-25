@@ -1,11 +1,13 @@
 #include <iostream>
-#include "HttpServer.h"
+#include "Server.h"
 
 int main()
 {
-	//HttpServer server(3756);
+	//Server server(3756);
 	//server.start();
 
+	//AbstractServer<HttpServerConnection, HttpRequest> s(3756);
+	//s.start();
 
 	return 0;
 }
