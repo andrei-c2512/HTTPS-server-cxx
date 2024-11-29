@@ -1,50 +1,53 @@
 #pragma once
 #include "HttpReader.h"
 #include "HttpResponse.h"
-
+#include "TsQueue.h"
 
 class HttpResponseReader : public HttpReader {
 public:
-	HttpResponseReader() = default;
-
-
-	HttpVersion version() const noexcept { return _version; }
+	HttpResponseReader(TsQueue<std::shared_ptr<HttpResponse>>& queue0) 
+		:queue(queue0)
+	{}
+	HttpCommon::Version version() const noexcept { return _version; }
 	int16_t statusCode() const noexcept { return _statusCode; }
-	ByteArray phrase() const noexcept { return _phrase; }
+	std::string phrase() const noexcept { return _phrase; }
 
 	std::unique_ptr<HttpResponse> response() {
 		return std::make_unique<HttpResponse>(_version, _statusCode, _phrase, headers, std::move(doc));
-		//return nullptr;
 	}
 
-	ByteArray messageByteArray() const {
-
-	}
 	std::string messageString() const {
-
+		return "";
 	}
 protected:
-	void processFirstLine(const std::vector<char>& buf) override {
+	void onFinishedMessage() override {
+		assert(_ready && "Attempted to call onFinishedMessage when the message wasn't finished");
+		_ready = false;
+		queue.push_back(response());
+	}
+	void processFirstLine(const std::string& buf) override {
 		int32_t last = 0;
 
-		std::vector<ByteArray> vec(3);
+		std::vector<std::string> vec(3);
 		int32_t j = 0, i = 0;
 		for (; i < buf.size(); i++) {
 			if (buf[i] == ' ') {
-				vec[j] = ByteArray(buf.begin() + last, buf.begin() + i - 1);
+				vec[j] = std::string(buf.begin() + last, buf.begin() + i);
 				last = i + 1;
 				j++;
 			}
 		}
-		vec[j] = ByteArray(buf.begin() + last, buf.begin() + i - 1);
+		vec[j] = std::string(buf.begin() + last, buf.begin() + i);
 
-		_version = HttpCommon::get().stringToVersion(std::move(vec[0]));
-		_statusCode = StringHelper::toString(std::move(vec[1]));
+		_version = HttpCommon::VersionCodex::get().stringToVersion(std::move(vec[0]));
+		_statusCode = stoi(std::move(vec[1]));
 		_phrase = std::move(vec[2]);
 	}
 protected:
-	HttpVersion _version;
+	HttpCommon::Version _version;
 	int16_t _statusCode;
-	ByteArray _phrase;
+	std::string _phrase;
+
+	TsQueue<std::shared_ptr<HttpResponse>>& queue;
 };
 

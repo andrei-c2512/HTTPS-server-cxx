@@ -26,19 +26,29 @@ public:
 		}
 		extractHeaders(str, strCursor);*/
 	}
-	HttpRequest(HttpVerb v, const ByteArray& URI0, HttpVersion version0,
-		const std::map<ByteArray, ByteArray>& headers0, std::unique_ptr<rapidjson::Document> d0)
+	HttpRequest(HttpCommon::Verb v, const std::string& URI0, HttpCommon::Version version0,
+		const std::map<std::string, std::string>& headers0, std::unique_ptr<rapidjson::Document> d0)
 		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(version0)
 	{}
 
-
-	HttpVerb verb() const noexcept { return _verb; }
-	ByteArray URI() const noexcept { return _URI; }
-	HttpVersion version() const noexcept { return _version; }
+	static std::string requestFirstLine(HttpCommon::Verb verb , const std::string& URI  , HttpCommon::Version version) {
+		return HttpCommon::VerbCodex::get().verbToString(verb) + ' ' + 
+			URI + ' ' + 
+			HttpCommon::VersionCodex::get().versionToString(version) + '\n';
+	}
+	HttpCommon::Verb verb() const noexcept { return _verb; }
+	std::string URI() const noexcept { return _URI; }
+	HttpCommon::Version version() const noexcept { return _version; }
 	
 	std::string scheme() const noexcept;
 	std::string server() const noexcept;
 	std::string path() const noexcept;
+
+	std::string toString() const override {
+		return requestFirstLine(_verb, _URI , _version) + 
+			HttpMessage::headersToString(_headers) + 
+			HttpMessage::documentToString(*doc);
+	}
 protected:
 	void processFirstLine(const std::string& line) override {
 
@@ -51,8 +61,8 @@ private:
 	void extractPath();
 	int32_t extractHeaders(const std::string& str, int32_t start);
 private:
-	HttpVerb _verb;
-	ByteArray _URI;
-	HttpVersion _version;
+	HttpCommon::Verb _verb;
+	std::string _URI;
+	HttpCommon::Version _version;
 };
 

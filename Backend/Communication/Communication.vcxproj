@@ -24,6 +24,8 @@
     <ClInclude Include="Algo.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="HttpClient.h" />
+    <ClInclude Include="HttpHeader.h" />
     <ClInclude Include="HttpMessage.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="HttpRequestReader.h" />

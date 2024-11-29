@@ -15,4 +15,10 @@
 
 
 
+#ifdef DEBUG
+#define DEBUG_MSG(x) x
+#else
+#define DEBUG_MSG(x)
+#endif
+
 typedef std::vector<char> ByteArray;

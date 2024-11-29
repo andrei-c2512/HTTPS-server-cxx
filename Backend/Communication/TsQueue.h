@@ -25,7 +25,7 @@ public:
 	}
 	bool empty() const {
 		std::scoped_lock lock(mDeq);
-		return lock.empty();
+		return deq.empty();
 	}
 	size_t size() const {
 		std::scoped_lock lock(mDeq);
@@ -33,7 +33,7 @@ public:
 	}
 	void clear() {
 		std::scoped_lock lock(mDeq);
-		return deq.size();
+		deq.clear();
 	}
 	T pop_front() {
 		std::scoped_lock lock(mDeq);
@@ -48,6 +48,6 @@ public:
 		return last;
 	}
 protected:
-	std::mutex mDeq;
+	mutable std::mutex mDeq;
 	std::deque<T> deq;
 };

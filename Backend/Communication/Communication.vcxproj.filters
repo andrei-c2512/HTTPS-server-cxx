@@ -102,5 +102,11 @@
     <ClInclude Include="HttpResponse.h">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
+    <ClInclude Include="HttpClient.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpHeader.h">
+      <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

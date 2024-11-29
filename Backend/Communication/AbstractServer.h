@@ -11,18 +11,21 @@ public:
 		:asioAcceptor(asioContext, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
 	{}
 	virtual ~AbstractServer() {
-		onStop();
-		asioContext.stop();
+		stop();
+		//onStop();
+		//asioContext.stop();
 
-		if (contextThread.joinable()) contextThread.join();
+		//if (contextThread.joinable()) contextThread.join();
 
 		//I would just call stop() but for some reason it causes a linker error here because of ConsoleLog ? tf
 	}
 	void start() {
 		try {
 			listen();
+			ConsoleLog::message("Listening...");
 			onStart();
 			contextThread = std::thread([this]() { asioContext.run();  });
+			
 		}
 		catch (std::exception& e) {
 			ConsoleLog::error(e.what());
@@ -40,12 +43,14 @@ public:
 	}
 
 	void listen() {
-		asioAcceptor.async_accept( 
+		asioAcceptor.async_accept(
 			[this](std::error_code ec, asio::ip::tcp::socket socket) {
+				ConsoleLog::message("Listening...");
 				if (!ec) {
-					ConsoleLog::message("New connection");
-					std::shared_ptr<HttpServerConnection> conn = std::make_shared<HttpServerConnection>(asioContext, std::move(socket), readQueue);
+					ConsoleLog::info("New connection");
+					std::shared_ptr<connection> conn = std::make_shared<connection>(asioContext, std::move(socket), readQueue);
 					list.addNew(conn);
+					conn->listen();
 				}
 				else {
 					ConsoleLog::error("Connection error: " + ec.message());
@@ -59,6 +64,7 @@ public:
 		while (readQueue.empty() == false) {
 			auto request = readQueue.front();
 			readQueue.pop_front();
+			ConsoleLog::info("Processing new message...");
 			onNewMessage(request);
 		}
 	}

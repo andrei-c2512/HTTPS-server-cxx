@@ -4,21 +4,33 @@
 
 class HttpResponse : public HttpMessage {
 public:
-	HttpResponse(const std::string& str);
-	HttpResponse(HttpVersion version, int32_t statusCode, const ByteArray& phrase,
-		const std::map<ByteArray, ByteArray>& headers, std::unique_ptr<rapidjson::Document> d0)
+	HttpResponse(const std::string& str)
+		:HttpMessage(str)
+	{}
+	HttpResponse(HttpCommon::Version version, int32_t statusCode, const std::string& phrase,
+		const std::map<std::string, std::string>& headers, std::unique_ptr<rapidjson::Document> d0)
 		:HttpMessage(headers, std::move(d0)), _version(version), _statusCode(statusCode), _phrase(phrase)
 	{}
 
-	HttpVersion version() const noexcept { return _version; }
+	static std::string responseFirstLine(HttpCommon::Version version, int32_t statusCode, const std::string& phrase) {
+		return HttpCommon::VersionCodex::get().versionToString(version) + ' ' +
+			std::to_string(statusCode) + ' ' + 
+			phrase + '\n';
+	}
+	std::string toString() const override {
+		return responseFirstLine(_version, _statusCode, _phrase) +
+			HttpMessage::headersToString(_headers) +
+			HttpMessage::documentToString(*doc);
+	}
+	HttpCommon::Version version() const noexcept { return _version; }
 	int32_t statusCode() const noexcept { return _statusCode; }
-	ByteArray phrase() const noexcept { return _phrase; }
+	std::string phrase() const noexcept { return _phrase; }
 protected:
 	void processFirstLine(const std::string& line) override {
 
 	}
 private:
-	HttpVersion _version;
+	HttpCommon::Version _version;
 	int32_t _statusCode;
-	ByteArray _phrase;
+	std::string _phrase;
 };

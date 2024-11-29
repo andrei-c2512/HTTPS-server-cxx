@@ -4,8 +4,7 @@
 class Message {
 public:
 	Message() = default;
-	virtual ByteArray toByteArray() const {}
-	virtual std::string toString() const {}
+	virtual std::string toString() const { return ""; }
 };
 
 
