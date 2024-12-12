@@ -3,7 +3,8 @@
 #include "HttpResponse.h"
 #include "TsQueue.h"
 
-class HttpResponseReader : public HttpReader {
+template<IsSocket socketType>
+class HttpResponseReader : public HttpReader<socketType> {
 public:
 	HttpResponseReader(TsQueue<std::shared_ptr<HttpResponse>>& queue0) 
 		:queue(queue0)
@@ -49,5 +50,9 @@ protected:
 	std::string _phrase;
 
 	TsQueue<std::shared_ptr<HttpResponse>>& queue;
+
+	using HttpReader<socketType>::_ready;
+	using HttpReader<socketType>::doc;
+	using HttpReader<socketType>::headers;
 };
 

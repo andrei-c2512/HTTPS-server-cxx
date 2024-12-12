@@ -1,5 +1,5 @@
 #pragma once
-#include "Connection.h"
+#include "AbstractConnection.h"
 #include "asio.hpp"
 
 //shit's wild , so basically
@@ -8,7 +8,8 @@
 		   -> a type of connection that takes said message
 */
 
-template<message messageTypeIn , message messageTypeOut, connection<messageTypeIn , messageTypeOut> connectionType>
+//I hate how I cannot verify if connectionType is of type connection without having loads of template arguments
+template<message messageTypeIn , message messageTypeOut, typename connectionType>
 class AbstractClient {
 public:
 	AbstractClient() {}

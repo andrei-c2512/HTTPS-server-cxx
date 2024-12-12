@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractClient.h" />
+    <ClInclude Include="AbstractConnection.h" />
     <ClInclude Include="AbstractServer.h" />
+    <ClInclude Include="BasicServer.h" />
     <ClInclude Include="Algo.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="Connection.h" />
+    <ClInclude Include="BasicConnection.h" />
     <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpHeader.h" />
     <ClInclude Include="HttpMessage.h" />
@@ -31,7 +33,13 @@
     <ClInclude Include="HttpRequestReader.h" />
     <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="HttpResponseReader.h" />
+    <ClInclude Include="HttpsClient.h" />
+    <ClInclude Include="HttpsClientConnection.h" />
     <ClInclude Include="HttpServer.h" />
+    <ClInclude Include="HttpsServer.h" />
+    <ClInclude Include="HttpsServerSession.h" />
+    <ClInclude Include="SecureConnection.h" />
+    <ClInclude Include="SecureServer.h" />
     <ClInclude Include="ServerConnectionList.h" />
     <ClInclude Include="ConsoleLog.h" />
     <ClInclude Include="HttpClientConnection.h" />
@@ -96,7 +104,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)rapidjson-master\include\rapidjson;$(SolutionDir)asio-1.30.2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libraries\sslBuild\STATIC\x64\Debug\include;$(SolutionDir)rapidjson-master\include\rapidjson;$(SolutionDir)asio-1.30.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -148,6 +156,9 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>Ws2_32.lib;crypt32.lib;$(SolutionDir)\openssl-x64\Debug\lib\libcrypto.lib;$(SolutionDir)\openssl-x64\Debug\lib\libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

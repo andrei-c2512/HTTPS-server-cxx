@@ -4,6 +4,7 @@
 #include "ConsoleLog.h"
 
 
+
 template<typename connection, typename messageType>
 class AbstractServer {
 public:
@@ -12,14 +13,8 @@ public:
 	{}
 	virtual ~AbstractServer() {
 		stop();
-		//onStop();
-		//asioContext.stop();
-
-		//if (contextThread.joinable()) contextThread.join();
-
-		//I would just call stop() but for some reason it causes a linker error here because of ConsoleLog ? tf
 	}
-	void start() {
+	virtual void start() {
 		try {
 			listen();
 			ConsoleLog::message("Listening...");
@@ -33,7 +28,7 @@ public:
 
 		ConsoleLog::message("Server started");
 	}
-	void stop() {
+	virtual void stop() {
 		onStop();
 		asioContext.stop();
 
@@ -41,26 +36,9 @@ public:
 
 		ConsoleLog::message("Server stopped");
 	}
+	virtual void listen() {}
 
-	void listen() {
-		asioAcceptor.async_accept(
-			[this](std::error_code ec, asio::ip::tcp::socket socket) {
-				ConsoleLog::message("Listening...");
-				if (!ec) {
-					ConsoleLog::info("New connection");
-					std::shared_ptr<connection> conn = std::make_shared<connection>(asioContext, std::move(socket), readQueue);
-					list.addNew(conn);
-					conn->listen();
-				}
-				else {
-					ConsoleLog::error("Connection error: " + ec.message());
-				}
-				listen();
-			}
-		);
-	}
-
-	void update() {
+	void update(){
 		while (readQueue.empty() == false) {
 			auto request = readQueue.front();
 			readQueue.pop_front();

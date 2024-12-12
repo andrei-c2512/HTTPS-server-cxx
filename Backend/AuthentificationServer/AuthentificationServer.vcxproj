@@ -104,12 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Communication;$(SolutionDir)rapidjson-master\include\rapidjson;C:\libraries\asio-1.30.2\include;$(IncludePath)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libraries\sslBuild\STATIC\x64\Debug\include;$(SolutionDir)Communication;$(SolutionDir)rapidjson-master\include\rapidjson;C:\libraries\asio-1.30.2\include;$(IncludePath)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Ws2_32.lib;crypt32.lib;$(SolutionDir)\openssl-x64\Debug\lib\libcrypto.lib;$(SolutionDir)\openssl-x64\Debug\lib\libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

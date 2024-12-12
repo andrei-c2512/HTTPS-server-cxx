@@ -1,6 +1,6 @@
 #pragma once
 #include "HttpServerConnection.h"
-#include "AbstractServer.h"
+#include "BasicServer.h"
 
 /*
 	How the server works:
@@ -10,9 +10,10 @@
 		from their own socket and adds it to the message queue. 
 */
 
-class HttpServer : public AbstractServer<HttpServerConnection, HttpRequest> {
+
+class HttpServer : public BasicServer<HttpServerConnection, HttpRequest> {
 public:
 	HttpServer(int16_t port)
-		:AbstractServer<HttpServerConnection, HttpRequest>(port)
+		:BasicServer<HttpServerConnection, HttpRequest>(port)
 	{}
 }; 

@@ -1,6 +1,6 @@
 #pragma once
 #include "HttpMessage.h"
-#include "Connection.h"
+#include "BasicConnection.h"
 #include "HttpRequestReader.h"
 #include "HttpResponse.h"
 
@@ -8,21 +8,15 @@
 //this one is ready to read incoming requests(since servers respond to requests)
 
 
-class HttpServerConnection : public Connection<HttpRequest , HttpResponse> {
+class HttpServerConnection : public BasicConnection<HttpRequest , HttpResponse> {
 public:
-	HttpServerConnection(asio::io_context& context0, asio::ip::tcp::socket socket0, TsQueue<std::shared_ptr<HttpRequest>>& queue)
-		:Connection<HttpRequest , HttpResponse>(context0, std::move(socket0), queue)
+	HttpServerConnection(asio::io_context& context0, BasicSocket socket0, TsQueue<std::shared_ptr<HttpRequest>>& queue)
+		:BasicConnection<HttpRequest , HttpResponse>(context0, std::move(socket0), queue)
 	{
-		reader = std::make_shared<HttpRequestReader>(readQueue);
-	}
-	void listen() override {
-		//ConsoleLog::info("New connection with an id of " + std::to_string(_id) + " started listening");
-		reader->start(socket);
-	}
-	void writeMessage(std::shared_ptr<HttpResponse> msg) override {
-		
+		// a Http reader of type unsafe socket
+		reader = new HttpRequestReader<BasicSocket>(queue);
 	}
 protected:
-	std::shared_ptr<HttpRequestReader> reader;
-	ReadLoopStatus go = ReadLoopStatus::CONTINUE;
+	using BasicConnection<HttpRequest, HttpResponse>::socket;
+	using BasicConnection<HttpRequest, HttpResponse>::reader;
 };

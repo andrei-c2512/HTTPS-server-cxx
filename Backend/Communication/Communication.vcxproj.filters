@@ -25,17 +25,26 @@
     <Filter Include="Source Files\MessageHandling\Write">
       <UniqueIdentifier>{cc1e07e2-e3d9-41c8-b11b-ae294883d843}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MessageHandling\Write">
-      <UniqueIdentifier>{3cd40744-8b43-4a9e-add4-12e0f6be196f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MessageHandling\Read">
       <UniqueIdentifier>{5aabcb9d-5443-43ab-82d1-784715705e2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Connection">
-      <UniqueIdentifier>{5d7a019a-9983-44f2-aef1-3b228e27d501}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Connection">
       <UniqueIdentifier>{8ed960af-e46b-4478-b9ce-9f76c533b02a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Client">
+      <UniqueIdentifier>{8f189602-e755-46bb-944d-8f72b0cfebaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Connection/Session">
+      <UniqueIdentifier>{14220044-bd53-4054-8de0-54ba6ff2e119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Connection/Session\Http">
+      <UniqueIdentifier>{b5a6ca1c-8e90-4853-8da6-42790ae6c105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Connection/Session\Https">
+      <UniqueIdentifier>{f42c2035-ae9b-4d07-9f1a-354c28fb1560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Server">
+      <UniqueIdentifier>{344ff6e9-48cb-4d96-9562-7777752ea423}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,27 +75,6 @@
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Connection.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpClientConnection.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpServerConnection.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerConnectionList.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpServer.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractServer.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractClient.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
     <ClInclude Include="HttpResponseReader.h">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
@@ -102,11 +90,56 @@
     <ClInclude Include="HttpResponse.h">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="HttpClient.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
     <ClInclude Include="HttpHeader.h">
       <Filter>Header Files\MessageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicServer.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractServer.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureConnection.h">
+      <Filter>Header Files\Connection/Session</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicConnection.h">
+      <Filter>Header Files\Connection/Session</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractConnection.h">
+      <Filter>Header Files\Connection/Session</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractClient.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpsClient.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpsServer.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpClient.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServer.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpClientConnection.h">
+      <Filter>Header Files\Connection/Session\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServerConnection.h">
+      <Filter>Header Files\Connection/Session\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpsClientConnection.h">
+      <Filter>Header Files\Connection/Session\Https</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpsServerSession.h">
+      <Filter>Header Files\Connection/Session\Https</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConnectionList.h">
+      <Filter>Header Files\Connection/Session</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureServer.h">
+      <Filter>Header Files\Server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

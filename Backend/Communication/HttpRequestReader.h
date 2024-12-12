@@ -3,13 +3,12 @@
 #include "HttpRequest.h"
 
 
-class HttpRequestReader : public HttpReader {
+template<IsSocket socketType>
+class HttpRequestReader : public HttpReader<socketType> {
 public:
 	HttpRequestReader(TsQueue<std::shared_ptr<HttpRequest>>& queue0)
 		:queue(queue0)
 	{}
-
-
 
 	std::shared_ptr<HttpRequest> request()  {
 		return std::make_shared<HttpRequest>(_verb, _URI, _version, headers, std::move(doc));
@@ -29,6 +28,13 @@ public:
 
 		return m;
 	}
+
+
+	/*
+	*/
+	using HttpReader<socketType>::start;
+	/*
+	*/
 protected:
 	void onFinishedMessage() override {
 		assert(_ready && "Attempted to call onFinishedMessage when the message wasn't finished");
@@ -58,4 +64,8 @@ protected:
 	std::string _URI;
 	HttpCommon::Version _version;
 	TsQueue<std::shared_ptr<HttpRequest>>& queue;
+
+	using HttpReader<socketType>::doc;
+	using HttpReader<socketType>::headers;
+	using HttpReader<socketType>::_ready;
 };
