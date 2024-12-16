@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractClient.h" />
+    <ClInclude Include="BasicClient.h" />
     <ClInclude Include="AbstractConnection.h" />
     <ClInclude Include="AbstractServer.h" />
     <ClInclude Include="BasicServer.h" />
     <ClInclude Include="Algo.h" />
+    <ClInclude Include="ClientInterface.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="BasicConnection.h" />
     <ClInclude Include="HttpClient.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="HttpServer.h" />
     <ClInclude Include="HttpsServer.h" />
     <ClInclude Include="HttpsServerSession.h" />
+    <ClInclude Include="SecureClient.h" />
     <ClInclude Include="SecureConnection.h" />
     <ClInclude Include="SecureServer.h" />
     <ClInclude Include="ServerConnectionList.h" />

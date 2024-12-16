@@ -8,8 +8,8 @@ public:
 	SecureConnection(asio::io_context& context0, asio::ssl::context& sslContext,
 		SslSocket stream,
 		TsQueue<std::shared_ptr<messageTypeIn>>& queue0)
-		:AbstractConnection<messageTypeIn, messageTypeOut>(context0, queue0),
-		ssl_stream(stream)
+		:AbstractConnection<messageTypeIn, messageTypeOut , SslSocket>(context0, queue0),
+		ssl_stream(std::move(stream)), sslContext(sslContext)
 	{
 		//subclasses should instantiate their reader here
 		// I do not want the reader to be set from the constructor , I think it's ugly design in this case
@@ -86,4 +86,3 @@ protected:
 	using AbstractConnection<messageTypeIn, messageTypeOut , SslSocket>::writeQueue;
 	using AbstractConnection<messageTypeIn, messageTypeOut, SslSocket>::reader;
 };
-

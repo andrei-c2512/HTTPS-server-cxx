@@ -15,6 +15,10 @@ public:
 		stop();
 	}
 	virtual void start() {
+		if (abort) {
+			ConsoleLog::error("Server is COOKED , cannot start");
+			return;
+		}
 		try {
 			listen();
 			ConsoleLog::message("Listening...");
@@ -58,4 +62,7 @@ protected:
 	asio::ip::tcp::acceptor asioAcceptor;
 	TsQueue<std::shared_ptr<messageType>> readQueue;
 	ServerConnectionList<connection> list;
+
+
+	bool abort = false;
 };

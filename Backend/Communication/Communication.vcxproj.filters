@@ -108,7 +108,7 @@
     <ClInclude Include="AbstractConnection.h">
       <Filter>Header Files\Connection/Session</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractClient.h">
+    <ClInclude Include="BasicClient.h">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
     <ClInclude Include="HttpsClient.h">
@@ -140,6 +140,12 @@
     </ClInclude>
     <ClInclude Include="SecureServer.h">
       <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInterface.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureClient.h">
+      <Filter>Header Files\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 #pragma once
-#include "HttpServer.h"
-#include "SecureServer.h"
+#include "HttpsServer.h"
 
-class Server : public HttpServer {
+class Server : public HttpsServer {
 public:
 	Server(int32_t port);
 protected:

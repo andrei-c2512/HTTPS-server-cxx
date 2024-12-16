@@ -1,9 +1,9 @@
 #pragma once
-#include "AbstractClient.h"
+#include "BasicClient.h"
 #include "HttpResponse.h"
 #include "HttpClientConnection.h"
 
-class HttpClient : public AbstractClient<HttpResponse, HttpRequest , HttpClientConnection> {
+class HttpClient : public BasicClient<HttpResponse, HttpRequest , HttpClientConnection> {
 public:
-	using AbstractClient::AbstractClient;
+	using BasicClient::BasicClient;
 };

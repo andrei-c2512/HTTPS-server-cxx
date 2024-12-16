@@ -1,7 +1,7 @@
 #pragma once
 #include "AbstractConnection.h"
 #include "asio.hpp"
-
+#include "ClientInterface.h"
 //shit's wild , so basically
 /*
 	client -> needs something of type message
@@ -10,10 +10,10 @@
 
 //I hate how I cannot verify if connectionType is of type connection without having loads of template arguments
 template<message messageTypeIn , message messageTypeOut, typename connectionType>
-class AbstractClient {
+class BasicClient : public ClientInterface<messageTypeOut> {
 public:
-	AbstractClient() {}
-	~AbstractClient() {
+	BasicClient() {}
+	~BasicClient() {
 		disconnect();
 	}
 	void connect(const std::string& host, int16_t port) {

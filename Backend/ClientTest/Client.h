@@ -4,11 +4,13 @@
 #include <fstream>
 #include "HttpRequest.h"
 #include "HttpHeader.h"
+#include "HttpsClient.h"
 
 
-class Client : public HttpClient{
+class Client : public HttpsClient{
 public:
-	Client() {
+	Client()
+	:HttpsClient("C:/Users/Andrei C/security/ca.crt"){
 		connect("127.0.0.1", 3756);
 	}
 	void sendTestMessage(const std::string_view& fileName) {
