@@ -5,7 +5,7 @@
 
 
 
-template<typename connection, typename messageType>
+template<typename connection, typename messageTypeIn , typename messageTypeOut>
 class AbstractServer {
 public:
 	AbstractServer(int16_t port)
@@ -51,7 +51,7 @@ public:
 		}
 	}
 protected:
-	virtual void onNewMessage(std::shared_ptr<messageType> message) {}
+	virtual void onNewMessage(std::shared_ptr<messageTypeIn> message) {}
 	virtual void onNewConnection(std::shared_ptr<connection> connection) {}
 	virtual void onStop() {}
 	virtual void onStart() {}
@@ -60,8 +60,8 @@ protected:
 	std::thread contextThread;
 
 	asio::ip::tcp::acceptor asioAcceptor;
-	TsQueue<std::shared_ptr<messageType>> readQueue;
-	ServerConnectionList<connection> list;
+	TsQueue<std::shared_ptr<messageTypeIn>> readQueue;
+	ServerConnectionList<connection , messageTypeOut> list;
 
 
 	bool abort = false;

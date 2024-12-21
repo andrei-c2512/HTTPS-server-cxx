@@ -6,10 +6,12 @@
 #include "writer.h"
 #include "stringbuffer.h"
 #include "prettywriter.h"
+#include "HttpHeaders.h"
 
 
 class HttpMessage : public Message {
 public:
+	HttpMessage() = default;
 	HttpMessage(const std::string& str)
 	{
 		int32_t i = 0;
@@ -18,26 +20,11 @@ public:
 		processHeaders(str, i);
 		processBody(str, i);
 	}
-	HttpMessage(const std::map<std::string, std::string>& headers0, std::unique_ptr<rapidjson::Document> d0)
+	HttpMessage(const HttpHeaders& headers0, std::unique_ptr<rapidjson::Document> d0)
 		:_headers(headers0), doc(std::move(d0))
 	{}
 	const rapidjson::Document& document() const noexcept { return *doc; }
-	std::map<std::string, std::string> headers() const noexcept { return _headers; }
-	static std::string headersToString(const std::map<std::string, std::string>& headers) {
-		std::string headerText;
-
-		for (const auto& [key, value] : headers) {
-			std::string line;
-			line.append(key.begin(), key.end());
-			line.append(":");
-			line.append(value.begin(), value.end());
-			line.append("\n");
-
-			headerText.append(line);
-		}
-
-		return headerText;
-	}
+	HttpHeaders headers() const noexcept { return _headers; }
 	static std::string documentToString(const rapidjson::Document& doc) {
 		rapidjson::StringBuffer buf;
 		rapidjson::Writer<rapidjson::StringBuffer> writer(buf);
@@ -52,7 +39,6 @@ public:
 
 		return buf.GetString();
 	}
-
 protected:
 	virtual void processFirstLine(const std::string& line) = 0;
 	void processHeaders(const std::string& str, int32_t& pos) {
@@ -62,7 +48,7 @@ protected:
 
 	}
 protected:
-	std::map<std::string, std::string> _headers;
-	std::unique_ptr<rapidjson::Document> doc;
+	HttpHeaders _headers;
+	std::unique_ptr<rapidjson::Document> doc = nullptr;
 };
 

@@ -46,6 +46,12 @@
     <Filter Include="Header Files\Server">
       <UniqueIdentifier>{344ff6e9-48cb-4d96-9562-7777752ea423}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\JWT">
+      <UniqueIdentifier>{2e871f85-f259-491c-a9ed-869e6314e35f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Server\Routing">
+      <UniqueIdentifier>{583dca1d-009b-456a-a263-2483e4d20436}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TsQueue.h">
@@ -90,7 +96,7 @@
     <ClInclude Include="HttpResponse.h">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="HttpHeader.h">
+    <ClInclude Include="HttpHeaders.h">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
     <ClInclude Include="BasicServer.h">
@@ -146,6 +152,21 @@
     </ClInclude>
     <ClInclude Include="SecureClient.h">
       <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="DataFilters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JWTgenerator.h">
+      <Filter>Header Files\JWT</Filter>
+    </ClInclude>
+    <ClInclude Include="JWTverifier.h">
+      <Filter>Header Files\JWT</Filter>
+    </ClInclude>
+    <ClInclude Include="ListRouter.h">
+      <Filter>Header Files\Server\Routing</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterInterface.h">
+      <Filter>Header Files\Server\Routing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

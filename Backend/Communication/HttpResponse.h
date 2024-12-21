@@ -4,13 +4,25 @@
 
 class HttpResponse : public HttpMessage {
 public:
-	HttpResponse(const std::string& str)
-		:HttpMessage(str)
-	{}
+	HttpResponse() = default;
+	HttpResponse(const std::string& str, int32_t id = 0)
+		:HttpMessage(str) 
+	{
+		setUserId(id);
+	}
+	HttpResponse(int32_t statusCode, const std::string& phrase,
+		const HttpHeaders& headers, std::unique_ptr<rapidjson::Document> d0 = nullptr, int32_t id = 0)
+		:HttpMessage(headers, std::move(d0)), _version(HttpCommon::VersionCodex::get().defaultVersion) , _statusCode(statusCode), _phrase(phrase)
+	{
+		setUserId(id);
+	}
+
 	HttpResponse(HttpCommon::Version version, int32_t statusCode, const std::string& phrase,
-		const std::map<std::string, std::string>& headers, std::unique_ptr<rapidjson::Document> d0)
+		const HttpHeaders& headers, std::unique_ptr<rapidjson::Document> d0 = nullptr , int32_t id = 0)
 		:HttpMessage(headers, std::move(d0)), _version(version), _statusCode(statusCode), _phrase(phrase)
-	{}
+	{
+		setUserId(id);
+	}
 
 	static std::string responseFirstLine(HttpCommon::Version version, int32_t statusCode, const std::string& phrase) {
 		return HttpCommon::VersionCodex::get().versionToString(version) + ' ' +
@@ -18,9 +30,15 @@ public:
 			phrase + '\n';
 	}
 	std::string toString() const override {
-		return responseFirstLine(_version, _statusCode, _phrase) +
-			HttpMessage::headersToString(_headers) +
-			HttpMessage::documentToString(*doc);
+		if (doc != nullptr) {
+			return responseFirstLine(_version, _statusCode, _phrase) +
+				HttpHeaders::headersToString(_headers) +
+				HttpMessage::documentToString(*doc);
+		}
+		else {
+			return responseFirstLine(_version, _statusCode, _phrase) +
+				HttpHeaders::headersToString(_headers);
+		}
 	}
 	HttpCommon::Version version() const noexcept { return _version; }
 	int32_t statusCode() const noexcept { return _statusCode; }

@@ -1,6 +1,7 @@
 #pragma once
 #include "HttpServerConnection.h"
 #include "BasicServer.h"
+#include "ListRouter.h"
 
 /*
 	How the server works:
@@ -11,9 +12,22 @@
 */
 
 
-class HttpServer : public BasicServer<HttpServerConnection, HttpRequest> {
+class HttpServer : public BasicServer<HttpServerConnection, HttpRequest , HttpResponse> {
 public:
 	HttpServer(int16_t port)
-		:BasicServer<HttpServerConnection, HttpRequest>(port)
+		:BasicServer<HttpServerConnection, HttpRequest , HttpResponse>(port)
 	{}
+	//no need to manage memory
+	void setRouter(std::unique_ptr<RouterInterface> router0) {
+		router = std::move(router0);
+	}
+protected:
+	void onNewMessage(std::shared_ptr<HttpRequest> message) override {
+		assert(router && "Please provide a router. You can set it with setRouter() function");
+		std::shared_ptr<HttpResponse> response = router->handleRequest(message->URI(), message);
+		list.sendMessage(response, response->userId());
+	}
+private:
+	std::unique_ptr<RouterInterface> router = nullptr;
+	BasicServer<HttpServerConnection, HttpRequest, HttpResponse>::list;
 }; 

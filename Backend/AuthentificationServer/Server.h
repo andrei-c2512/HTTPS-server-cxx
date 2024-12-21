@@ -1,5 +1,6 @@
 #pragma once
 #include "HttpsServer.h"
+#include "ListRouter.h"
 
 class Server : public HttpsServer {
 public:

@@ -2,11 +2,11 @@
 #include "AbstractServer.h"
 
 //will only work for connection classes that use SslSocket
-template<typename connection, typename messageType>
-class SecureServer : public AbstractServer<connection, messageType> {
+template<typename connection, typename messageTypeIn , typename messageTypeOut>
+class SecureServer : public AbstractServer<connection, messageTypeIn , messageTypeOut> {
 public:
-	SecureServer(int16_t port , const std::string& certFile , const std::string& keyFile)
-		:AbstractServer<connection, messageType>(port) , sslContext(asio::ssl::context::sslv23)
+	SecureServer(int16_t port , const std::string& certFile , const std::string& keyFile , std::vector<std::string> approvedCerts)
+		:AbstractServer<connection, messageTypeIn , messageTypeOut>(port) , sslContext(asio::ssl::context::sslv23)
 	{
 		sslContext.set_options(asio::ssl::context::default_workarounds |
 			asio::ssl::context::no_sslv2 |
@@ -15,31 +15,14 @@ public:
 
 		asio::error_code ec;
 		sslContext.use_certificate_chain_file(certFile , ec);
-		if (!ec)
-			ConsoleLog::info("Sucessfully loaded certificate file");
-		else
-		{
-			ConsoleLog::error("Failed to load certificate file: " + ec.message());
-			abort = true;
-		}
-
-
+		abort = abort || ConsoleLog::handleError(ec, "Sucessfully loaded certificate file", "Failed to load certificate file");
 
 		sslContext.use_private_key_file(keyFile, asio::ssl::context::pem , ec);
-		if (!ec)
-			ConsoleLog::info("Sucessfully loaded private key file");
-		else
-		{
-			ConsoleLog::error("Failed to load private key file: " + ec.message());
-			abort = true;
-		}
+		abort = abort || ConsoleLog::handleError(ec, "Sucessfully loaded private key file", "Failed to load private key file");
 
-		sslContext.load_verify_file(certFile, ec);
-		if (!ec) {
-			ConsoleLog::info("Added new file for verification");
-		}
-		else {
-			ConsoleLog::error("Failed to load the certificate file: " + ec.message());
+		for (const std::string& filePath : approvedCerts) {
+			sslContext.load_verify_file(filePath, ec);
+			abort = abort || ConsoleLog::handleError(ec, "Added new file for verification", "Failed to load the certificate file");
 		}
 	}
 
@@ -61,9 +44,9 @@ public:
 				}
 			});
 	}
-	AbstractServer<connection, messageType>::update;
-	AbstractServer<connection, messageType>::stop;
-	AbstractServer<connection, messageType>::start;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::update;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::stop;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::start;
 protected:
 	void startHandshake(SslSocket* socket) {
 		socket->async_handshake(asio::ssl::stream_base::server,
@@ -85,10 +68,15 @@ protected:
 		});
 	}
 protected:
+	virtual void onNewMessage(std::shared_ptr<messageTypeIn> message) override {}
+	virtual void onNewConnection(std::shared_ptr<connection> connection) override {}
+	virtual void onStop() override {}
+	virtual void onStart() override {}
+protected:
 	asio::ssl::context sslContext;
-	AbstractServer<connection, messageType>::asioAcceptor;
-	AbstractServer<connection, messageType>::readQueue;
-	AbstractServer<connection, messageType>::list;
-	AbstractServer<connection, messageType>::asioContext;
-	AbstractServer<connection, messageType>::abort;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::asioAcceptor;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::readQueue;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::list;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::asioContext;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::abort;
 };

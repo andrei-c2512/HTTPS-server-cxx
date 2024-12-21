@@ -27,8 +27,9 @@
     <ClInclude Include="ClientInterface.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="BasicConnection.h" />
+    <ClInclude Include="DataFilters.h" />
     <ClInclude Include="HttpClient.h" />
-    <ClInclude Include="HttpHeader.h" />
+    <ClInclude Include="HttpHeaders.h" />
     <ClInclude Include="HttpMessage.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="HttpRequestReader.h" />
@@ -39,6 +40,9 @@
     <ClInclude Include="HttpServer.h" />
     <ClInclude Include="HttpsServer.h" />
     <ClInclude Include="HttpsServerSession.h" />
+    <ClInclude Include="JWTgenerator.h" />
+    <ClInclude Include="JWTverifier.h" />
+    <ClInclude Include="RouterInterface.h" />
     <ClInclude Include="SecureClient.h" />
     <ClInclude Include="SecureConnection.h" />
     <ClInclude Include="SecureServer.h" />
@@ -50,6 +54,7 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageReader.h" />
     <ClInclude Include="HttpCommon.h" />
+    <ClInclude Include="ListRouter.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="TsQueue.h" />
   </ItemGroup>

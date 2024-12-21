@@ -3,14 +3,14 @@
 #include <memory>
 #include <fstream>
 #include "HttpRequest.h"
-#include "HttpHeader.h"
+#include "HttpHeaders.h"
 #include "HttpsClient.h"
 
 
 class Client : public HttpsClient{
 public:
 	Client()
-	:HttpsClient("C:/Users/Andrei C/security/ca.crt"){
+	:HttpsClient("C:/Users/Andrei C/security/ca.crt" , std::vector<std::string>(1, "C:/Users/Andrei C/security/ca.crt")){
 		connect("127.0.0.1", 3756);
 	}
 	void sendTestMessage(const std::string_view& fileName) {
@@ -30,13 +30,13 @@ public:
 		//ConsoleLog::info(HttpMessage::documentToPrettyString(*doc));
 
 
-		HttpHeader header;
+		HttpHeaders header;
 		header.add(HttpCommon::Header::CONTENT_LENGTH, std::to_string(docStr.size()));
 		header.add(HttpCommon::Header::CONTENT_TYPE, "json");
 		
 		std::shared_ptr<HttpRequest> req = std::make_shared<HttpRequest>(
 			HttpCommon::Verb::POST, "/login",
-			HttpCommon::Version::HTTP11, header.map(), std::move(doc)
+			HttpCommon::Version::HTTP11, header, std::move(doc)
 		);
 		ConsoleLog::info(req->toString());
 

@@ -8,24 +8,17 @@
 template<message messageTypeIn, message messageTypeOut, typename connectionType>
 class SecureClient : public ClientInterface<messageTypeOut> {
 public:
-	SecureClient(const std::string& certificatePath) 
+	SecureClient(const std::string& certificatePath , std::vector<std::string> approvedCerts)
 		:sslContext(asio::ssl::context::sslv23)
 	{
 		asio::error_code ec;
 		sslContext.use_certificate_chain_file(certificatePath, ec);
-		if (!ec) {
-			ConsoleLog::info("Sucessfully loaded the certificate key");
-		}
-		else {
-			ConsoleLog::error("Failed to use the certificatefile: " + ec.message());
-		}
+		_abort = _abort || ConsoleLog::handleError(ec, "Sucessfully loaded the certificate file", "Failed to use the certificate file");
+
 		sslContext.set_verify_mode(asio::ssl::verify_peer);
-		sslContext.load_verify_file(certificatePath, ec);
-		if (!ec) {
-			ConsoleLog::info("Added new file for verification");
-		}
-		else {
-			ConsoleLog::error("Failed to load the certificate file: " + ec.message());
+		for (const std::string& filePath : approvedCerts) {
+			sslContext.load_verify_file(filePath, ec);
+			_abort = _abort || ConsoleLog::handleError(ec, "Added new file for verification", "Failed to load the certificate file");
 		}
 	}
 	~SecureClient() {
@@ -70,4 +63,5 @@ protected:
 	TsQueue<std::shared_ptr<messageTypeIn>> readQueue;
 
 	std::shared_ptr<connectionType> conn;
+	bool _abort = false;
 };

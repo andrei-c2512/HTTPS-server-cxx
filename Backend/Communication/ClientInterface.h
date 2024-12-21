@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <memory>
 
 template <typename messageTypeOut>
 class ClientInterface {

@@ -4,7 +4,7 @@
 
 class HttpsClient : public SecureClient<HttpResponse, HttpRequest, HttpsClientConnection> {
 public:
-	HttpsClient(const std::string& publicKeyPath)
-		:SecureClient<HttpResponse, HttpRequest, HttpsClientConnection>(publicKeyPath)
+	HttpsClient(const std::string& certificateFile , std::vector<std::string> approvedList)
+		:SecureClient<HttpResponse, HttpRequest, HttpsClientConnection>(certificateFile , std::move(approvedList))
 	{}
 };

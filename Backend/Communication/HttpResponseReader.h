@@ -14,7 +14,7 @@ public:
 	std::string phrase() const noexcept { return _phrase; }
 
 	std::unique_ptr<HttpResponse> response() {
-		return std::make_unique<HttpResponse>(_version, _statusCode, _phrase, headers, std::move(doc));
+		return std::make_unique<HttpResponse>(_version, _statusCode, _phrase, headers, std::move(doc) , _userId);
 	}
 
 	std::string messageString() const {
@@ -54,5 +54,6 @@ protected:
 	using HttpReader<socketType>::_ready;
 	using HttpReader<socketType>::doc;
 	using HttpReader<socketType>::headers;
+	using HttpReader<socketType>::_userId;
 };
 

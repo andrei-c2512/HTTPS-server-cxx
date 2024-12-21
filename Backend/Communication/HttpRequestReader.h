@@ -11,7 +11,7 @@ public:
 	{}
 
 	std::shared_ptr<HttpRequest> request()  {
-		return std::make_shared<HttpRequest>(_verb, _URI, _version, headers, std::move(doc));
+		return std::make_shared<HttpRequest>(_verb, _URI, _version, headers, std::move(doc) , _userId);
 	}
 
 
@@ -23,7 +23,7 @@ public:
 	std::string messageString() const {
 		std::string m;
 		m.append(HttpRequest::requestFirstLine(_verb, _URI, _version));
-		m.append(HttpMessage::headersToString(headers));
+		m.append(HttpHeaders::headersToString(headers));
 		m.append(HttpMessage::documentToString(*doc));
 
 		return m;
@@ -68,4 +68,5 @@ protected:
 	using HttpReader<socketType>::doc;
 	using HttpReader<socketType>::headers;
 	using HttpReader<socketType>::_ready;
+	using HttpReader<socketType>::_userId;
 };

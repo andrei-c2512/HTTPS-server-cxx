@@ -31,12 +31,15 @@ public:
 	virtual bool connect(const std::string& host, int16_t port) { return false; }
 	virtual void disconnect() {}
 	virtual bool isConnected() const { return false; }
-	void setId(int32_t id0) { _id = id0; }
+	virtual void setId(int32_t id0) noexcept { 
+		_id = id0; 
+		if (reader != nullptr)
+			reader->setUserId(id0);
+	}
 
 	int32_t id() const noexcept { return _id; }
 	//listens for data
 	virtual void listen(){}
-	virtual void writeMessage(std::shared_ptr<messageTypeOut> msg) = 0;
 public:
 	void send(std::shared_ptr<messageTypeOut> msg) {
 		asio::post(context, [this, msg]() {
@@ -48,6 +51,8 @@ public:
 			}
 			});
 	}
+protected:
+	virtual void writeMessage(std::shared_ptr<messageTypeOut> msg) = 0;
 protected:
 	asio::io_context& context;
 	TsQueue<std::shared_ptr<messageTypeOut>> writeQueue;

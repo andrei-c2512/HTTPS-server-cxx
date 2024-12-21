@@ -2,6 +2,9 @@
 #include <string>
 #include <vector>
 #include "Common.h"
+#include "document.h"
+#include "stringbuffer.h"
+#include "writer.h"
 
 
 class StringHelper {
@@ -28,6 +31,14 @@ public:
 			}
 		}
 		return "";
+	}
+	static std::string jsonToString(const rapidjson::Document& doc) {
+		using namespace rapidjson;
+		StringBuffer docBuffer;
+		Writer<StringBuffer> writer(docBuffer);
+		doc.Accept(writer);
+
+		return docBuffer.GetString();
 	}
 };
 			

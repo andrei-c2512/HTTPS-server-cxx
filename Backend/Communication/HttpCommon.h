@@ -35,6 +35,7 @@ namespace HttpCommon {
 		HTTP11
 	};
 
+
 	class HeaderCodex {
 	public:
 		HeaderCodex& operator=(const HeaderCodex&) = delete;
@@ -106,6 +107,8 @@ namespace HttpCommon {
 			static VersionCodex h;
 			return h;
 		}
+	public:
+		Version defaultVersion = Version::HTTP11;
 	private:
 		VersionCodex() {
 

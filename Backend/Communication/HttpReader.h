@@ -121,7 +121,7 @@ protected:
 				if (HttpCommon::HeaderCodex::get().stringToHeader(header) == HttpCommon::Header::CONTENT_LENGTH)
 					jsonDocSize = stoi(std::string(value.begin(), value.end()));
 
-				headers.emplace(header, value);
+				headers.add(header, value);
 				return;
 			}
 		}
@@ -140,7 +140,7 @@ protected:
 	virtual void onFinishedMessage() = 0;
 	virtual void processFirstLine(const std::string& buf) = 0;
 protected:
-	std::map<std::string, std::string> headers;
+	HttpHeaders headers;
 	std::unique_ptr<rapidjson::Document> doc;
 	std::array<std::string, 3> reqTypeStorage;
 

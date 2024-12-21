@@ -2,7 +2,7 @@
 #include "ConsoleLog.h"
 
 
-template <typename T>
+template <typename T , typename msgOut>
 class ServerConnectionList {
 public:
 	ServerConnectionList() = default;
@@ -73,6 +73,10 @@ public:
 		}
 		ConsoleLog::warning("Did not find any client with an id of <" + std::to_string(id) + ">");
 		return nullptr;
+	}
+	void sendMessage(std::shared_ptr<msgOut> message , int32_t id) {
+		auto user = get(id);
+		user->send(message);
 	}
 private:
 	//I won't use std::list despite constant add/remove because searching for a specific id would be costly with it

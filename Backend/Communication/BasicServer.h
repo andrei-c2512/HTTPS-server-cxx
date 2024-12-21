@@ -5,11 +5,11 @@
 #include "AbstractServer.h"
 
 //will only work for connection classes that use BasicSocket
-template<typename connection, typename messageType>
-class BasicServer : public AbstractServer<connection , messageType>{
+template<typename connection, typename messageTypeIn , typename messageTypeOut>
+class BasicServer : public AbstractServer<connection , messageTypeIn , messageTypeOut>{
 public:
 	BasicServer(int16_t port)
-		:AbstractServer<connection, messageType>(port)
+		:AbstractServer<connection, messageTypeIn , messageTypeOut>(port)
 	{}
 	
 
@@ -30,12 +30,12 @@ public:
 			}
 		);
 	}
-	AbstractServer<connection, messageType>::update;
-	AbstractServer<connection, messageType>::stop;
-	AbstractServer<connection, messageType>::start;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::update;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::stop;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::start;
 protected:
-	AbstractServer<connection, messageType>::asioAcceptor;
-	AbstractServer<connection, messageType>::readQueue;
-	AbstractServer<connection, messageType>::list;
-	AbstractServer<connection, messageType>::asioContext;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::asioAcceptor;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::readQueue;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::list;
+	AbstractServer<connection, messageTypeIn , messageTypeOut>::asioContext;
 };
