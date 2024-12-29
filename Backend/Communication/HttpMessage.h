@@ -14,16 +14,17 @@ public:
 	HttpMessage() = default;
 	HttpMessage(const std::string& str)
 	{
+		doc.SetObject();
 		int32_t i = 0;
 		std::string firstLine = StringHelper::nextLine(str, i);
 		processFirstLine(firstLine);
 		processHeaders(str, i);
 		processBody(str, i);
 	}
-	HttpMessage(const HttpHeaders& headers0, std::unique_ptr<rapidjson::Document> d0)
+	HttpMessage(const HttpHeaders& headers0, rapidjson::Document d0)
 		:_headers(headers0), doc(std::move(d0))
 	{}
-	const rapidjson::Document& document() const noexcept { return *doc; }
+	const rapidjson::Document& document() const noexcept { return doc; }
 	HttpHeaders headers() const noexcept { return _headers; }
 	static std::string documentToString(const rapidjson::Document& doc) {
 		rapidjson::StringBuffer buf;
@@ -49,6 +50,6 @@ protected:
 	}
 protected:
 	HttpHeaders _headers;
-	std::unique_ptr<rapidjson::Document> doc = nullptr;
+	rapidjson::Document doc;
 };
 

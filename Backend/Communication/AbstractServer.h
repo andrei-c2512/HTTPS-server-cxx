@@ -23,7 +23,9 @@ public:
 			listen();
 			ConsoleLog::message("Listening...");
 			onStart();
-			contextThread = std::thread([this]() { asioContext.run();  });
+			contextThread = std::thread([this]() { 
+				asioContext.run(); 
+				});
 			
 		}
 		catch (std::exception& e) {

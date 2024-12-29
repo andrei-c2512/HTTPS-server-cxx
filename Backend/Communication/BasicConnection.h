@@ -56,10 +56,13 @@ public:
 	bool isConnected() const override { return socket.is_open(); }
 	//listens for data
 	virtual void listen() {
-		reader->start(socket);
+		asio::post(context, [this]() {
+			reader->start(socket);
+			});
 	}
 protected:
 	void writeMessage(std::shared_ptr<messageTypeOut> msg) override {
+		_canWrite = false;
 		std::string str = msg->toString();
 		//since asio handles chunking huge messages , I don't need to implement that.
 		asio::async_write(socket, asio::buffer(str.data(), str.size()),
@@ -69,8 +72,9 @@ protected:
 					ConsoleLog::info("Sucessfully wrote a request to the server");
 					ConsoleLog::info("Request size: " + std::to_string(length));
 
-					if(writeQueue.empty() == false)
+					if (writeQueue.empty() == false) {
 						writeMessage(writeQueue.front());
+					}
 				}
 				else
 					ConsoleLog::error("Failed to write a request to the server");
@@ -84,5 +88,6 @@ protected:
 	using AbstractConnection<messageTypeIn, messageTypeOut, BasicSocket>::context;
 	using AbstractConnection<messageTypeIn, messageTypeOut, BasicSocket>::writeQueue;
 	using AbstractConnection<messageTypeIn, messageTypeOut, BasicSocket>::reader;
+	using AbstractConnection<messageTypeIn, messageTypeOut, BasicSocket>::_canWrite;
 };
 

@@ -14,7 +14,7 @@ public:
 		:BasicConnection<HttpRequest , HttpResponse>(context0, std::move(socket0), queue)
 	{
 		// a Http reader of type unsafe socket
-		reader = new HttpRequestReader<BasicSocket>(queue);
+		reader = new HttpRequestReader<BasicSocket>(_canWrite, queue);
 	}
 protected:
 	using BasicConnection<HttpRequest, HttpResponse>::socket;

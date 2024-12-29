@@ -58,13 +58,13 @@ protected:
 
 				list.addNew(conn);
 				conn->listen();
-				listen();
 			}
 			else
 			{
 				ConsoleLog::error("Handshake failed: " + ec.message());
 			}
 			delete socket;
+			listen();
 		});
 	}
 protected:

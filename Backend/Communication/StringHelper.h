@@ -5,7 +5,10 @@
 #include "document.h"
 #include "stringbuffer.h"
 #include "writer.h"
+#include <concepts>
 
+template <typename T>
+concept StringPair = std::is_same_v<T, std::pair<const char*, const char*>>;
 
 class StringHelper {
 public:
@@ -39,6 +42,32 @@ public:
 		doc.Accept(writer);
 
 		return docBuffer.GetString();
+	}
+
+	static size_t jsonCharLength(const rapidjson::Document& doc) {
+		using namespace rapidjson;
+		StringBuffer docBuffer;
+		Writer<StringBuffer> writer(docBuffer);
+		doc.Accept(writer);
+
+		return docBuffer.GetSize();
+	}
+
+	template<StringPair pair>
+	static void addPair(rapidjson::Document& doc, pair p) {
+		doc.AddMember(
+			rapidjson::Value(p.first, doc.GetAllocator()),
+			rapidjson::Value(p.second, doc.GetAllocator()),
+			doc.GetAllocator()
+		);
+	}
+	template<StringPair... Pairs>
+	static rapidjson::Document createBasicDoc(const Pairs&... pairs) {
+		rapidjson::Document doc;
+		doc.SetObject();
+		//(doc.AddMember(pairs.first, pairs.second, doc.GetAllocator()), ...);
+		(addPair(doc, pairs), ...);
+		return doc;
 	}
 };
 			

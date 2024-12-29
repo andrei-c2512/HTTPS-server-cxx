@@ -11,14 +11,14 @@ public:
 		setUserId(id);
 	}
 	HttpResponse(int32_t statusCode, const std::string& phrase,
-		const HttpHeaders& headers, std::unique_ptr<rapidjson::Document> d0 = nullptr, int32_t id = 0)
+		const HttpHeaders& headers, rapidjson::Document d0 = {}, int32_t id = 0)
 		:HttpMessage(headers, std::move(d0)), _version(HttpCommon::VersionCodex::get().defaultVersion) , _statusCode(statusCode), _phrase(phrase)
 	{
 		setUserId(id);
 	}
 
 	HttpResponse(HttpCommon::Version version, int32_t statusCode, const std::string& phrase,
-		const HttpHeaders& headers, std::unique_ptr<rapidjson::Document> d0 = nullptr , int32_t id = 0)
+		const HttpHeaders& headers, rapidjson::Document d0 = {} ,  int32_t id = 0)
 		:HttpMessage(headers, std::move(d0)), _version(version), _statusCode(statusCode), _phrase(phrase)
 	{
 		setUserId(id);
@@ -30,10 +30,10 @@ public:
 			phrase + '\n';
 	}
 	std::string toString() const override {
-		if (doc != nullptr) {
+		if (doc.MemberCount() != 0) {
 			return responseFirstLine(_version, _statusCode, _phrase) +
 				HttpHeaders::headersToString(_headers) +
-				HttpMessage::documentToString(*doc);
+				HttpMessage::documentToString(doc);
 		}
 		else {
 			return responseFirstLine(_version, _statusCode, _phrase) +
@@ -43,6 +43,19 @@ public:
 	HttpCommon::Version version() const noexcept { return _version; }
 	int32_t statusCode() const noexcept { return _statusCode; }
 	std::string phrase() const noexcept { return _phrase; }
+
+	static std::unique_ptr<HttpResponse> createErrorResponse(const std::string_view& error) {
+		rapidjson::Document body;
+		body.SetObject();
+		rapidjson::Value errorValue(error.data(), body.GetAllocator());
+
+		body.AddMember("error", errorValue, body.GetAllocator());
+		HttpHeaders headers;
+		headers.add(HttpCommon::Header::CONTENT_TYPE, "application/json");
+		headers.add(HttpCommon::Header::CONTENT_LENGTH, std::to_string(StringHelper::jsonCharLength(body)));
+
+		return std::make_unique<HttpResponse>(400 ,  "Bad request", std::move(headers), std::move(body));
+	}
 protected:
 	void processFirstLine(const std::string& line) override {
 

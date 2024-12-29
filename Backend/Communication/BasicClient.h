@@ -10,7 +10,7 @@
 
 //I hate how I cannot verify if connectionType is of type connection without having loads of template arguments
 template<message messageTypeIn , message messageTypeOut, typename connectionType>
-class BasicClient : public ClientInterface<messageTypeOut> {
+class BasicClient : public ClientInterface<messageTypeIn , messageTypeOut> {
 public:
 	BasicClient() {}
 	~BasicClient() {
@@ -45,8 +45,17 @@ public:
 	void send(std::shared_ptr<messageTypeOut> msg) {
 		conn->send(msg);
 	}
+	void update() override{
+		while (readQueue.empty() == false) {
+			auto request = readQueue.front();
+			readQueue.pop_front();
+			ConsoleLog::info("Processing new message...");
+			onNewMessage(request);
+		}
+	}
 protected:
-	virtual void onDisconnect() {}
+	using ClientInterface<messageTypeIn, messageTypeOut>::onDisconnect;
+	using ClientInterface<messageTypeIn, messageTypeOut>::onNewMessage;
 protected:
 	asio::io_context context;
 	std::thread contextThread;

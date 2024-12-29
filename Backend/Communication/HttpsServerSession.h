@@ -11,6 +11,6 @@ public:
 		TsQueue<std::shared_ptr<HttpRequest>>& queue0)
 		: SecureConnection<HttpRequest, HttpResponse>(context0, sslContext, std::move(stream), queue0)
 	{
-		reader = new HttpRequestReader<SslSocket>(queue0);
+		reader = new HttpRequestReader<SslSocket>(_canWrite, queue0);
 	}
 };

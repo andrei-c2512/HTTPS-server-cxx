@@ -22,8 +22,8 @@ public:
 		BUF_MEM* buffer;
 		BIO_get_mem_ptr(bio, &buffer);
 
+		std::string result(buffer->data, buffer->length);
 		BIO_free_all(bio);
-		std::string result(buffer->data, buffer->length - 1);
 		return result;
 	}
 	static std::string encodeBase64(rapidjson::Document doc) {

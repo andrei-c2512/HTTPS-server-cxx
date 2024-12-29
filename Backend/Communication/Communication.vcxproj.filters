@@ -16,20 +16,8 @@
     <Filter Include="Header Files\MessageHandling">
       <UniqueIdentifier>{86edbe0e-d499-41ef-8eb4-abc200b41c7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MessageHandling">
-      <UniqueIdentifier>{ab98a9b9-5c6f-4fb5-84e1-f88c2e53bbcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MessageHandling\Read">
-      <UniqueIdentifier>{d4397e96-334a-450c-89cb-29704ddb9d99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MessageHandling\Write">
-      <UniqueIdentifier>{cc1e07e2-e3d9-41c8-b11b-ae294883d843}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MessageHandling\Read">
       <UniqueIdentifier>{5aabcb9d-5443-43ab-82d1-784715705e2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Connection">
-      <UniqueIdentifier>{8ed960af-e46b-4478-b9ce-9f76c533b02a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Client">
       <UniqueIdentifier>{8f189602-e755-46bb-944d-8f72b0cfebaf}</UniqueIdentifier>
@@ -150,9 +138,6 @@
     <ClInclude Include="ClientInterface.h">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="SecureClient.h">
-      <Filter>Header Files\Client</Filter>
-    </ClInclude>
     <ClInclude Include="DataFilters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -167,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="RouterInterface.h">
       <Filter>Header Files\Server\Routing</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureClient.h">
+      <Filter>Header Files\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

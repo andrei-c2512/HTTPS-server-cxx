@@ -24,9 +24,11 @@ public:
 protected:
 	void onNewMessage(std::shared_ptr<HttpRequest> message) override {
 		assert(router && "Please provide a router. You can set it with setRouter() function");
-		std::shared_ptr<HttpResponse> response = router->handleRequest(message->URI(), message);
+		std::shared_ptr<HttpResponse> response = router->handleRequest(message);
 		list.sendMessage(response, response->userId());
 	}
+	//you can initialize your router here , set to 0 to force an implementation
+	virtual void initRouter() = 0;
 private:
 	std::unique_ptr<RouterInterface> router = nullptr;
 	BasicServer<HttpServerConnection, HttpRequest, HttpResponse>::list;

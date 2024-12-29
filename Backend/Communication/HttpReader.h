@@ -9,10 +9,12 @@
 template<IsSocket socketType>
 class HttpReader : public AbstractMessageReader<socketType> {
 public:
-	HttpReader() {
+	HttpReader(bool& canWriteFlag) 
+		:AbstractMessageReader<socketType>(canWriteFlag)
+	{
 		//how many kbs I want
-		const int kb = 1;
-		bufferSize = 16;
+		const int kb = 4;
+		bufferSize = kb * 1048;
 		buffer.resize(bufferSize);
 	}
 
@@ -23,7 +25,7 @@ public:
 protected:
 	void readHeader(socketType& socket)
 	{
-		ConsoleLog::info("Started reading");
+		//ConsoleLog::info("Started reading");
 		//I hate how it doesn't approve of std::string as a buffer
 		//edit: nvm I switched to C++ 20 and buffer.data() changed from const char* to char*
  		socket.async_read_some(asio::buffer(buffer.data(), bufferSize),
@@ -93,11 +95,12 @@ protected:
 			[this, &socket](std::error_code ec, std::size_t length) {
 				if (!ec) {
 					jsonDocByteArr.append(buffer);
-					ConsoleLog::info(jsonDocByteArr);
+					//ConsoleLog::info(jsonDocByteArr);
 					createJson();
 					_ready = true;
 					jsonDocSize = 0;
 
+					_canWriteFlag = true;
 					onFinishedMessage();
 					ConsoleLog::info("Sucessfully read a full message");
 					buffer.resize(bufferSize);
@@ -131,8 +134,8 @@ protected:
 		return line.size() == jsonDocSize;
 	}
 	void createJson() {
-		doc = std::make_unique<rapidjson::Document>();
-		if (doc->Parse(jsonDocByteArr.data()).HasParseError())
+		doc.SetObject();
+		if (doc.Parse(jsonDocByteArr.data()).HasParseError())
 			ConsoleLog::error("Failed to parse json!");
 	}
 protected:
@@ -141,7 +144,7 @@ protected:
 	virtual void processFirstLine(const std::string& buf) = 0;
 protected:
 	HttpHeaders headers;
-	std::unique_ptr<rapidjson::Document> doc;
+	rapidjson::Document doc;
 	std::array<std::string, 3> reqTypeStorage;
 
 	std::string unfinishedMessage;
@@ -159,5 +162,6 @@ protected:
 	bool firstLineRead = false;
 
 	using AbstractMessageReader<socketType>::_ready;
+	using AbstractMessageReader<socketType>::_canWriteFlag;
 };
 

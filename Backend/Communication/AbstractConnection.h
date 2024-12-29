@@ -61,6 +61,7 @@ protected:
 	int32_t _id = -1;
 
 	AbstractMessageReader<socketType>* reader = nullptr;
+	bool _canWrite = true;
 };
 
 

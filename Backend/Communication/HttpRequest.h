@@ -29,13 +29,13 @@ public:
 		extractHeaders(str, strCursor);*/
 	}
 	HttpRequest(HttpCommon::Verb v, const std::string& URI0,
-		const HttpHeaders& headers0, std::unique_ptr<rapidjson::Document> d0, int32_t id = 0)
+		const HttpHeaders& headers0, rapidjson::Document d0, int32_t id = 0)
 		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(HttpCommon::VersionCodex::get().defaultVersion)
 	{
 		setUserId(id);
 	}
 	HttpRequest(HttpCommon::Verb v, const std::string& URI0, HttpCommon::Version version0,
-		const HttpHeaders& headers0, std::unique_ptr<rapidjson::Document> d0 , int32_t id = 0)
+		const HttpHeaders& headers0, rapidjson::Document d0 , int32_t id = 0)
 		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(version0)
 	{
 		setUserId(id);
@@ -56,10 +56,10 @@ public:
 	std::string path() const noexcept;
 
 	std::string toString() const override {
-		if (doc != nullptr) {
+		if (doc.MemberCount() != 0) {
 			return requestFirstLine(_verb, _URI, _version) +
 				HttpHeaders::headersToString(_headers) +
-				HttpMessage::documentToString(*doc);
+				HttpMessage::documentToString(doc);
 		}
 		else {
 			return requestFirstLine(_verb, _URI, _version) +

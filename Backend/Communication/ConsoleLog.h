@@ -6,24 +6,24 @@
 
 class ConsoleLog {
 public:
-	static void message(const std::string_view& str) {
+	static void message( std::string_view str) {
 		printColoredText("[MESSAGE]", "92");
 		std::cout << ' ' << str << '\n';
 	}
-	static void error(const std::string_view& str){
+	static void error(std::string_view str){
 		printColoredText("[ERROR]", "91");
 		std::cout << ' ' << str << '\n';
 	}
-	static void warning(const std::string_view& str) {
+	static void warning(std::string_view str) {
 		printColoredText("[WARNING]", "93");
 		std::cout << ' ' << str << '\n';
 	}
-	static void info(const std::string_view& str) {
+	static void info(std::string_view str) {
 		printColoredText("[INFO]", "96");
 		std::cout << ' ' << str << '\n';
 	}
 	//returns true on error
-	static bool handleError(asio::error_code& ec, const std::string_view& sucessMsg , const std::string& errorMsg) {
+	static bool handleError(asio::error_code& ec, std::string_view sucessMsg , const std::string& errorMsg) {
 		if (!ec) {
 			ConsoleLog::info(sucessMsg);
 			return false;
@@ -35,7 +35,7 @@ public:
 		}
 	}
 private:
-	static void printColoredText(const std::string_view& msg, const std::string_view& color) {
+	static void printColoredText(std::string_view msg, std::string_view color) {
 		std::cout << "\033[" << color << "m" << msg << "\033[0m";
 	}
 };

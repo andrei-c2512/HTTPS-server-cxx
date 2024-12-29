@@ -6,8 +6,8 @@
 template<IsSocket socketType>
 class HttpResponseReader : public HttpReader<socketType> {
 public:
-	HttpResponseReader(TsQueue<std::shared_ptr<HttpResponse>>& queue0) 
-		:queue(queue0)
+	HttpResponseReader(bool& canWriteFlag ,TsQueue<std::shared_ptr<HttpResponse>>& queue0) 
+		:HttpReader<socketType>(canWriteFlag), queue(queue0)
 	{}
 	HttpCommon::Version version() const noexcept { return _version; }
 	int16_t statusCode() const noexcept { return _statusCode; }

@@ -5,7 +5,9 @@
 template<IsSocket socketType>
 class AbstractMessageReader {
 public:
-	AbstractMessageReader() = default;
+	AbstractMessageReader(bool& canWriteFlag)
+		:_canWriteFlag(canWriteFlag)
+	{}
 	virtual void start(socketType& socket) = 0;
 	virtual std::string messageString() const = 0;
 	bool ready() const noexcept { return _ready; }
@@ -17,6 +19,7 @@ public:
 	}
 protected:
 	bool _ready = false;
+	bool& _canWriteFlag = false;
 	int32_t _userId = -1;
 };
 

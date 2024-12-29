@@ -6,11 +6,15 @@
 #include "ConsoleLog.h"
 
 template<message messageTypeIn, message messageTypeOut, typename connectionType>
-class SecureClient : public ClientInterface<messageTypeOut> {
+class SecureClient : public ClientInterface<messageTypeIn , messageTypeOut> {
 public:
 	SecureClient(const std::string& certificatePath , std::vector<std::string> approvedCerts)
-		:sslContext(asio::ssl::context::sslv23)
+		:sslContext(asio::ssl::context::sslv23) , workGuard(asioContext.get_executor())
 	{
+		contextThread = std::thread([this]() {
+			asioContext.run();
+		});
+
 		asio::error_code ec;
 		sslContext.use_certificate_chain_file(certificatePath, ec);
 		_abort = _abort || ConsoleLog::handleError(ec, "Sucessfully loaded the certificate file", "Failed to use the certificate file");
@@ -28,12 +32,6 @@ public:
 		try {
 			conn = std::make_shared<connectionType>(asioContext, sslContext , SslSocket(asioContext , sslContext), readQueue);
 			conn->connect(host, port);
-
-			asio::executor_work_guard<asio::io_context::executor_type> work_guard(asioContext.get_executor());
-
-			contextThread = std::thread([this]() {
-				asioContext.run();
-			});
 		}
 		catch (std::exception& e) {
 			ConsoleLog::error(e.what());
@@ -51,13 +49,24 @@ public:
 	bool isConnected() const noexcept { return conn->isConnected(); }
 
 	void send(std::shared_ptr<messageTypeOut> msg) {
+		assert(asioContext.stopped() == false);
 		conn->send(msg);
 	}
+	void update() override {
+		while (readQueue.empty() == false) {
+			auto request = readQueue.front();
+			readQueue.pop_front();
+			ConsoleLog::info("Processing new message...");
+			onNewMessage(request);
+		}
+	}
 protected:
-	virtual void onDisconnect() {}
+	using ClientInterface<messageTypeIn, messageTypeOut>::onDisconnect;
+	using ClientInterface<messageTypeIn, messageTypeOut>::onNewMessage;
 protected:
 	asio::ssl::context sslContext;
 	asio::io_context asioContext;
+	asio::executor_work_guard<asio::io_context::executor_type> workGuard;
 	std::thread contextThread;
 
 	TsQueue<std::shared_ptr<messageTypeIn>> readQueue;

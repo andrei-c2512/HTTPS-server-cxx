@@ -57,20 +57,24 @@ public:
 	bool isConnected() const override { return ssl_stream.lowest_layer().is_open(); }
 	//listens for data
 	virtual void listen() {
-		reader->start(ssl_stream);
+		asio::post(context, [this]() {
+			reader->start(ssl_stream);
+			});
 	}
 protected:
 	void writeMessage(std::shared_ptr<messageTypeOut> msg) override {
 		std::string str = msg->toString();
 		//since asio handles chunking huge messages , I don't need to implement that.
 		asio::async_write(ssl_stream, asio::buffer(str.data(), str.size()),
-			[this](std::error_code ec, std::size_t length) {
+			[this , str](std::error_code ec, std::size_t length) {
 				if (!ec) {
 					writeQueue.pop_front();
-					ConsoleLog::info("Sucessfully wrote a request to the server");
+					ConsoleLog::message("Sucessfully wrote a message");
 					ConsoleLog::info("Request size: " + std::to_string(length));
+					ConsoleLog::info(str);
 
-					writeMessage(writeQueue.front());
+					if(writeQueue.empty() == false)
+						writeMessage(writeQueue.front());
 				}
 				else
 					ConsoleLog::error("Failed to write a request to the server");

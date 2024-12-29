@@ -6,8 +6,8 @@
 template<IsSocket socketType>
 class HttpRequestReader : public HttpReader<socketType> {
 public:
-	HttpRequestReader(TsQueue<std::shared_ptr<HttpRequest>>& queue0)
-		:queue(queue0)
+	HttpRequestReader(bool& canWriteFlag , TsQueue<std::shared_ptr<HttpRequest>>& queue0)
+		:HttpReader<socketType>(canWriteFlag) , queue(queue0)
 	{}
 
 	std::shared_ptr<HttpRequest> request()  {
@@ -24,7 +24,7 @@ public:
 		std::string m;
 		m.append(HttpRequest::requestFirstLine(_verb, _URI, _version));
 		m.append(HttpHeaders::headersToString(headers));
-		m.append(HttpMessage::documentToString(*doc));
+		m.append(HttpMessage::documentToString(doc));
 
 		return m;
 	}
