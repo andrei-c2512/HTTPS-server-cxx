@@ -1,5 +1,5 @@
-#include "DatabaseHandler.h"
-#include "ConsoleLog.h"
+#include "DatabaseHandler.hpp"
+#include "ConsoleLog.hpp"
 
 
 DatabaseHandler::DatabaseHandler(const std::string& localHost, int16_t port, const std::string& dbName,

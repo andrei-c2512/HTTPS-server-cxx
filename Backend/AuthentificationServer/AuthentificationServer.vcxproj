@@ -135,8 +135,8 @@
     <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DatabaseHandler.h" />
-    <ClInclude Include="Server.h" />
+    <ClInclude Include="DatabaseHandler.hpp" />
+    <ClInclude Include="Server.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

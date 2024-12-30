@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Client.h"
+#include "Client.hpp"
 #include <conio.h>
 #include <thread>
-#include "JWTgenerator.h"
+#include "DataFilters.hpp"
 
 int main()
 {

@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_DEPRECATE
-#include "Server.h"
+#include "Server.hpp"
 #include <cstdlib>
 const std::string host = "localhost";
 const int16_t     dbPort = 5432;

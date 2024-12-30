@@ -40,121 +40,133 @@
     <Filter Include="Header Files\Server\Routing">
       <UniqueIdentifier>{583dca1d-009b-456a-a263-2483e4d20436}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Client\ResponseHandler">
+      <UniqueIdentifier>{69de63f9-f529-4452-b31a-2506b1c1fdf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TsQueue.h">
+    <ClInclude Include="TsQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StringHelper.h">
+    <ClInclude Include="StringHelper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleLog.h">
+    <ClInclude Include="ConsoleLog.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Algo.h">
+    <ClInclude Include="Algo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HttpCommon.h">
+    <ClInclude Include="HttpCommon.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="Message.h">
+    <ClInclude Include="Message.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="MessageReader.h">
+    <ClInclude Include="MessageReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
-    <ClInclude Include="HttpReader.h">
+    <ClInclude Include="HttpReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
+    <ClInclude Include="Common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HttpResponseReader.h">
+    <ClInclude Include="HttpResponseReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
-    <ClInclude Include="HttpRequestReader.h">
+    <ClInclude Include="HttpRequestReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
-    <ClInclude Include="HttpMessage.h">
+    <ClInclude Include="HttpMessage.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="HttpRequest.h">
+    <ClInclude Include="HttpRequest.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="HttpResponse.h">
+    <ClInclude Include="HttpResponse.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="HttpHeaders.h">
+    <ClInclude Include="HttpHeaders.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="BasicServer.h">
+    <ClInclude Include="BasicServer.hpp">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractServer.h">
+    <ClInclude Include="AbstractServer.hpp">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="SecureConnection.h">
+    <ClInclude Include="SecureConnection.hpp">
       <Filter>Header Files\Connection/Session</Filter>
     </ClInclude>
-    <ClInclude Include="BasicConnection.h">
+    <ClInclude Include="BasicConnection.hpp">
       <Filter>Header Files\Connection/Session</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractConnection.h">
+    <ClInclude Include="AbstractConnection.hpp">
       <Filter>Header Files\Connection/Session</Filter>
     </ClInclude>
-    <ClInclude Include="BasicClient.h">
+    <ClInclude Include="BasicClient.hpp">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="HttpsClient.h">
+    <ClInclude Include="HttpsClient.hpp">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="HttpsServer.h">
+    <ClInclude Include="HttpsServer.hpp">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="HttpClient.h">
+    <ClInclude Include="HttpClient.hpp">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="HttpServer.h">
+    <ClInclude Include="HttpServer.hpp">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="HttpClientConnection.h">
+    <ClInclude Include="HttpClientConnection.hpp">
       <Filter>Header Files\Connection/Session\Http</Filter>
     </ClInclude>
-    <ClInclude Include="HttpServerConnection.h">
+    <ClInclude Include="HttpServerConnection.hpp">
       <Filter>Header Files\Connection/Session\Http</Filter>
     </ClInclude>
-    <ClInclude Include="HttpsClientConnection.h">
+    <ClInclude Include="HttpsClientConnection.hpp">
       <Filter>Header Files\Connection/Session\Https</Filter>
     </ClInclude>
-    <ClInclude Include="HttpsServerSession.h">
+    <ClInclude Include="HttpsServerSession.hpp">
       <Filter>Header Files\Connection/Session\Https</Filter>
     </ClInclude>
-    <ClInclude Include="ServerConnectionList.h">
+    <ClInclude Include="ServerConnectionList.hpp">
       <Filter>Header Files\Connection/Session</Filter>
     </ClInclude>
-    <ClInclude Include="SecureServer.h">
+    <ClInclude Include="SecureServer.hpp">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="ClientInterface.h">
+    <ClInclude Include="ClientInterface.hpp">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="DataFilters.h">
+    <ClInclude Include="DataFilters.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JWTgenerator.h">
+    <ClInclude Include="JWTgenerator.hpp">
       <Filter>Header Files\JWT</Filter>
     </ClInclude>
-    <ClInclude Include="JWTverifier.h">
+    <ClInclude Include="JWTverifier.hpp">
       <Filter>Header Files\JWT</Filter>
     </ClInclude>
-    <ClInclude Include="ListRouter.h">
+    <ClInclude Include="ListRouter.hpp">
       <Filter>Header Files\Server\Routing</Filter>
     </ClInclude>
-    <ClInclude Include="RouterInterface.h">
+    <ClInclude Include="RouterInterface.hpp">
       <Filter>Header Files\Server\Routing</Filter>
     </ClInclude>
-    <ClInclude Include="SecureClient.h">
+    <ClInclude Include="SecureClient.hpp">
       <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractResponseHandler.hpp">
+      <Filter>Header Files\Client\ResponseHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpResponseHandler.hpp">
+      <Filter>Header Files\Client\ResponseHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpFilter.hpp">
+      <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
