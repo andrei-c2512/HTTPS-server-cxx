@@ -9,6 +9,7 @@
 
 namespace HttpCommon {
 	enum class Header {
+		INVALID,
 		CONTENT_TYPE,
 		HOST,
 		CONTENT_LENGTH,
@@ -36,7 +37,8 @@ namespace HttpCommon {
 		JSON,
 		CSS,
 		HTML,
-		JAVA_SCRIPT
+		JAVA_SCRIPT,
+		COUNT
 	};
 	enum class Version {
 		HTTP09,
@@ -46,21 +48,12 @@ namespace HttpCommon {
 
 	enum class StatusCode {
 		INVALID,
-		INFO,
-		SUCESS,
-		REDIRECT,
-		CLIENT_ERROR,
-		SERVER_ERROR
-	};
-	class Parser {
-	public:
-		static StatusCode getStatusCode(int16_t statusCode) {
-			if (statusCode >= 600) {
-				return StatusCode::CLIENT_ERROR;
-			}
-			else
-				return StatusCode(statusCode / 100);
-		}
+		CONTINUE = 100,
+		OK = 200,
+		MULTIPLE_CHOICES = 300,
+		BAD_REQUEST = 400,
+		UNAUTHORIZED = 401,
+		SERVER_ERROR = 500
 	};
 
 	class HeaderCodex {
@@ -71,7 +64,13 @@ namespace HttpCommon {
 			return headers[int(type)];
 		}
 		Header stringToHeader(const std::string& arr) {
-			return headerMap[arr];
+			auto it = headerMap.find(arr);
+			if (it == headerMap.end()) {
+				return Header::INVALID;
+			}
+			else {
+				return it->second;
+			}
 		}
 		static HeaderCodex& get() {
 			static HeaderCodex h;
@@ -79,10 +78,10 @@ namespace HttpCommon {
 		}
 	private:
 		HeaderCodex() {
-			headers = { "Content-type" , "Host" , "Content-Length" , "authorization" };
+			headers = { "Content-type" , "Host" , "Content-Length" , "Authorization" };
 
 			if (headers.size() != int(Header::COUNT))
-				ConsoleLog::warning("Not all headers are implemented");
+				ConsoleLog::warning("Not all headers are implemented in HttpCommon");
 
 			for (auto i = 0; i < headers.size(); i++) {
 				headerMap.emplace(headers[i], Header(i));
@@ -148,6 +147,42 @@ namespace HttpCommon {
 
 		std::map<std::string, Version> versionMap;
 		std::vector<std::string> versions;
+	};
+
+	class ContentTypeCodex {
+	public:
+		ContentTypeCodex& operator=(const ContentTypeCodex&) = delete;
+		ContentTypeCodex(const ContentTypeCodex&) = delete;
+
+		std::string typeToString(ContentType version) {
+			return list[int(version)];
+		}
+		auto stringToType(const std::string& arr) {
+			return map.find(arr);
+		}
+
+		static ContentTypeCodex& get() {
+			static ContentTypeCodex h;
+			return h;
+		}
+		std::map<std::string, ContentType> map;
+		std::vector<std::string> list;
+
+		const std::string& availableFormatsString() const noexcept {
+			return availableFormatsList;
+		}
+	private:
+		ContentTypeCodex() {
+			list = { "application/json" , "text/css" , "text/html" , "text/javascript" };
+			for (int32_t i = 0; i < int(ContentType::COUNT) ; i++) {
+				map.emplace(list[i] , ContentType(i));
+				availableFormatsList.append(list[i]);
+				list[i].append(", ");
+			}
+			list.pop_back();
+			list.pop_back();
+		}
+		std::string availableFormatsList;
 	};
 
 

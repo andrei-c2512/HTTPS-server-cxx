@@ -9,24 +9,19 @@ typedef std::map <std::string,
 class ListRouter : public RouterInterface {
 public:
 	ListRouter() = default;
-	void addRoute(HttpCommon::Verb verb , const std::string& route, 
-		std::function<std::shared_ptr<HttpResponse>(std::shared_ptr<HttpRequest>)> handler) override
+	void addResource(Resource res) override
 	{
-		verbMap[verb].insert(std::make_pair(route, handler));
+		resourceMap.emplace(res.name(), res);
 	}
 	[[nodiscard]] std::shared_ptr<HttpResponse> handleRequest(std::shared_ptr<HttpRequest> request) const override{
-		auto verbMapIt = verbMap.find(request->verb());
-		if (verbMapIt != verbMap.end()) {
-			auto routeMapIt = verbMapIt->second.find(request->URI());
-			if (routeMapIt != verbMapIt->second.end()) {
-				return routeMapIt->second(request);
-			}
-			else
-				return HttpResponse::createErrorResponse("Invalid route");
+
+		auto resMapIt = resourceMap.find(request->URI());
+		if (resMapIt != resourceMap.end()) {
+			return resMapIt->second.handle(request);
 		}
 		else
-			return HttpResponse::createErrorResponse("Invalid verb");
+			return HttpResponse::createErrorResponse("Invalid resource");
 	}
 private:
-	std::map<HttpCommon::Verb, RouteHandleMap> verbMap;
+	std::map<std::string, Resource> resourceMap;
 };

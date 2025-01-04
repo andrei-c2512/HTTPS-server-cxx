@@ -2,6 +2,7 @@
 #include "HttpsServerSession.hpp"
 #include "SecureServer.hpp"
 #include "RouterInterface.hpp"
+#include "HttpFilter.hpp"
 
 class HttpsServer : public SecureServer<HttpsServerSession , HttpRequest, HttpResponse> {
 public:
@@ -14,13 +15,24 @@ public:
 protected:
 	void onNewMessage(std::shared_ptr<HttpRequest> message) override {
 		assert(router && "Please provide a router. You can set it with setRouter() function");
-		std::shared_ptr<HttpResponse> response = router->handleRequest(message);
+
+		auto result = httpFilter.filter(message->headers());
+		std::shared_ptr<HttpResponse> response;
+		if (result.first == HttpCommon::StatusCode::CONTINUE) {
+			response = router->handleRequest(message);
+		}
+		else {
+			response = HttpResponse::createErrorResponse(result.second);
+		}
+		
+
 		list.sendMessage(response , response->userId());
 	}
 
 	//you can initialize your router here , set to 0 to force an implementation
 	virtual void initRouter() = 0;
 private:
+	HttpFilter httpFilter;
 	std::unique_ptr<RouterInterface> router = nullptr;
 	SecureServer<HttpsServerSession, HttpRequest, HttpResponse>::list;
 };

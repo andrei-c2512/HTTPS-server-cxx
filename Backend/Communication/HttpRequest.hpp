@@ -47,7 +47,7 @@ public:
 			HttpCommon::VersionCodex::get().versionToString(version) + '\n';
 	}
 	HttpCommon::Verb verb() const noexcept { return _verb; }
-	std::string URI() const noexcept { return _URI; }
+	const std::string& URI() const noexcept { return _URI; }
 	HttpCommon::Version version() const noexcept { return _version; }
 	
 	//might implement later lol

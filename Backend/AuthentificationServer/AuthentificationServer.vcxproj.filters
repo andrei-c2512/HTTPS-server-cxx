@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Source Files">
       <UniqueIdentifier>{3069cdeb-88d9-40cb-8a0d-370f3601503b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ResourceHandling">
+      <UniqueIdentifier>{222689a7-6edd-4c05-9685-f4f29f537bec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -24,8 +27,20 @@
     <ClCompile Include="Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DatbaseHandler.cpp">
+    <ClCompile Include="DatabaseHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthHandling.cpp">
+      <Filter>Source Files\ResourceHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="Auxiliary.cpp">
+      <Filter>Source Files\ResourceHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="DashHandling.cpp">
+      <Filter>Source Files\ResourceHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\ResourceHandling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DatabaseHandler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlingContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

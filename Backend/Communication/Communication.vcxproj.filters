@@ -37,26 +37,23 @@
     <Filter Include="Header Files\JWT">
       <UniqueIdentifier>{2e871f85-f259-491c-a9ed-869e6314e35f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Server\Routing">
-      <UniqueIdentifier>{583dca1d-009b-456a-a263-2483e4d20436}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Client\ResponseHandler">
       <UniqueIdentifier>{69de63f9-f529-4452-b31a-2506b1c1fdf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Routing">
+      <UniqueIdentifier>{583dca1d-009b-456a-a263-2483e4d20436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WebpageHandling">
+      <UniqueIdentifier>{e2a38be4-0be7-4492-8984-9fdf443fd0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{cff1c1f3-2fca-4a4b-9be5-2c184217d8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{d88a71cc-076d-4f34-ae72-3f48c27da8fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TsQueue.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StringHelper.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleLog.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Algo.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HttpCommon.hpp">
       <Filter>Header Files\MessageHandling</Filter>
     </ClInclude>
@@ -68,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="HttpReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HttpResponseReader.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
@@ -141,20 +135,17 @@
     <ClInclude Include="ClientInterface.hpp">
       <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="DataFilters.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="JWTgenerator.hpp">
       <Filter>Header Files\JWT</Filter>
     </ClInclude>
-    <ClInclude Include="JWTverifier.hpp">
+    <ClInclude Include="JWTvalidator.hpp">
       <Filter>Header Files\JWT</Filter>
     </ClInclude>
     <ClInclude Include="ListRouter.hpp">
-      <Filter>Header Files\Server\Routing</Filter>
+      <Filter>Header Files\Routing</Filter>
     </ClInclude>
     <ClInclude Include="RouterInterface.hpp">
-      <Filter>Header Files\Server\Routing</Filter>
+      <Filter>Header Files\Routing</Filter>
     </ClInclude>
     <ClInclude Include="SecureClient.hpp">
       <Filter>Header Files\Client</Filter>
@@ -168,5 +159,43 @@
     <ClInclude Include="HttpFilter.hpp">
       <Filter>Header Files\MessageHandling\Read</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Routing</Filter>
+    </ClInclude>
+    <ClInclude Include="WebPageCodex.hpp">
+      <Filter>Header Files\WebpageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="WebComponent.h">
+      <Filter>Header Files\WebpageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Algo.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="DataFilters.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHelper.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="TsQueue.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleLog.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WebPageDeliverer.hpp">
+      <Filter>Header Files\WebpageHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHelper.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

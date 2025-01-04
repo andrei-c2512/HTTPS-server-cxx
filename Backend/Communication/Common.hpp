@@ -13,6 +13,8 @@
 #include <string_view>
 #include <type_traits>
 #include <functional>
+#include <fstream>
+#include <filesystem>
 #include "asio.hpp"
 #include "asio/ssl.hpp"
 

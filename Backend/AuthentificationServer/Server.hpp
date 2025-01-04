@@ -1,9 +1,7 @@
 #pragma once
 #include "HttpsServer.hpp"
 #include "ListRouter.hpp"
-#include "JWTgenerator.hpp"
-#include "JWTverifier.hpp"
-#include "DatabaseHandler.hpp"
+#include "HandlingContext.hpp"
 
 class Server : public HttpsServer {
 public:
@@ -12,12 +10,8 @@ protected:
 	void onNewMessage(std::shared_ptr<HttpRequest> req) override;
 	void initRouter() override;
 private:
-	static bool assignFieldValue(const char** dest, const rapidjson::Document& body, const char* field);
-private:
 	JWT::Generator jwtGenerator;
-	JWT::Verifier jwtVerifier;
+	JWT::Validator jwtValidator;
 	DatabaseHandler dbHandler;
-
-	const char* registerFields[3] = { "name" , "email" , "password" };
-	const char* hostName = "localhost";
+	WebDelivery::PageDeliverer webPageDeliverer;
 };

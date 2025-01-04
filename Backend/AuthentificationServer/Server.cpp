@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #include "Server.hpp"
+#include "ResourceManager.hpp"
 #include <cstdlib>
 const std::string host = "localhost";
 const int16_t     dbPort = 5432;
@@ -7,81 +8,48 @@ const std::string dbName = "driveapp";
 const std::string user = "authserver";
 const std::string password = std::getenv("STREAMING_APP_DB");
 
+const std::string certificateFile = "C:/Users/Andrei C/security/ca.crt";
+const std::string certificatePrivateKeyFile = "C:/Users/Andrei C/security/ca.key";
+const std::string jwtPrivateKeyFile = "C:/Users/Andrei C/security/jwt_private_key.pem";
+const std::string jwtPublicKeyFile = "C:/Users/Andrei C/security/jwt_public_key.pem";
+
+
+//this should be a path relative to the AuthServer program
+const std::string webFolder = "Frontend/public";
 
 Server::Server(int32_t port)
 	:HttpsServer(port,
-		"C:/Users/Andrei C/security/ca.crt",
-		"C:/Users/Andrei C/security/ca.key", std::vector<std::string>(1, "C:/Users/Andrei C/security/ca.crt")),
+		certificateFile,
+		certificatePrivateKeyFile, std::vector<std::string>(1, certificateFile)),
 	dbHandler(host, dbPort, dbName, user, password),
-	jwtGenerator("C:/Users/Andrei C/security/jwt_private_key.pem"),
-	jwtVerifier("C:/Users/Andrei C/security/jwt_public_key.pem")
+	jwtGenerator(jwtPrivateKeyFile),
+	jwtValidator(jwtPublicKeyFile),
+	webPageDeliverer(webFolder)
 {
+	ResourceManager::ctx.jwtValidator = &jwtValidator;
+	ResourceManager::ctx.jwtGenerator = &jwtGenerator;
+	ResourceManager::ctx.dbHandler    = &dbHandler;
+	ResourceManager::ctx.wpDeliverer = &webPageDeliverer;
 	initRouter();
 }
 
-bool Server::assignFieldValue(const char** dest, const rapidjson::Document& body, const char* field) {
-	if (body.HasMember(field) && body[field].IsString()) {
-		*dest = body[field].GetString();
-		return true;
-	}
-	else
-		return false;
-}
-
-
 void Server::initRouter() {
+	using namespace HttpCommon;
+
 	auto router = std::make_unique<ListRouter>();
-	router->addRoute(HttpCommon::Verb::GET , "/", [](std::shared_ptr<HttpRequest> request) {
+	
+	VerbHandlerMap registerMap;
+	registerMap.emplace(Verb::POST, &ResourceManager::Auth::POST_register);
+	registerMap.emplace(Verb::GET, &ResourceManager::Auth::GET_register);
+	Resource reg("/register", registerMap);
 
-		HttpHeaders headers;
-		headers.add(HttpCommon::Header::CONTENT_TYPE, "json");
-		headers.add(HttpCommon::Header::CONTENT_LENGTH, "0");
-
-
-		auto response = std::make_shared<HttpResponse>(200, "OK", std::move(headers));
-		return response;
-	});
-
-	router->addRoute(HttpCommon::Verb::POST, "/register", [this](std::shared_ptr<HttpRequest> request) {
-		const rapidjson::Document& body = request->document();
-		const char* fieldValues[3];
-
-		if (!assignFieldValue(&fieldValues[0], body, registerFields[0])) {
-			return HttpResponse::createErrorResponse("Name is invalid or could not find field");
-		}
-
-		//we check if name is taken before reading the other fields , because we don't want to do operations
-		//on a bad request
-		if (dbHandler.isNameTaken(fieldValues[0])) 
-			return HttpResponse::createErrorResponse("Name already taken");
-
-		for (int8_t i = 1; i < 3; i++) {
-			if (!assignFieldValue(&fieldValues[i], body, registerFields[i])) {
-				return HttpResponse::createErrorResponse("Field is missing/invalid");
-			}
-		}
-
-		//need to hash again here kk
-		dbHandler.addUser(fieldValues[0], fieldValues[1], fieldValues[2]);
-
-		jwtGenerator.setPayload(
-			StringHelper::createBasicDoc(std::make_pair("name", fieldValues[0]))
-		);
+	VerbHandlerMap dashMap;
+	dashMap.emplace(Verb::GET, &ResourceManager::Dash::GET_dash);
+	Resource dash("/", dashMap);
 
 
-		rapidjson::Document jwtResponseBody = jwtGenerator.sucessfulJwtBody();
-		rapidjson::StringBuffer buf;
-		rapidjson::Writer w(buf);
-		jwtResponseBody.Accept(w);
-
-
-		HttpHeaders headers;
-		headers.add(HttpCommon::Header::CONTENT_TYPE, "json");
-		headers.add(HttpCommon::Header::CONTENT_LENGTH, std::to_string(buf.GetSize()));
-		headers.add(HttpCommon::Header::HOST, hostName);
-
-		return std::make_unique<HttpResponse>(200, "OK", std::move(headers), std::move(jwtResponseBody));
-	});
+	router->addResource(reg);
+	router->addResource(dash);
 	setRouter(std::move(router));
 }
 void Server::onNewMessage(std::shared_ptr<HttpRequest> req) {

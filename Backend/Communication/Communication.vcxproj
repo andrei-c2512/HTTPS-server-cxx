@@ -28,6 +28,7 @@
     <ClInclude Include="Common.hpp" />
     <ClInclude Include="BasicConnection.hpp" />
     <ClInclude Include="DataFilters.hpp" />
+    <ClInclude Include="FileHelper.hpp" />
     <ClInclude Include="HttpClient.hpp" />
     <ClInclude Include="HttpHeaders.hpp" />
     <ClInclude Include="HttpMessage.hpp" />
@@ -43,8 +44,9 @@
     <ClInclude Include="HttpsServer.hpp" />
     <ClInclude Include="HttpsServerSession.hpp" />
     <ClInclude Include="JWTgenerator.hpp" />
-    <ClInclude Include="JWTverifier.hpp" />
+    <ClInclude Include="JWTvalidator.hpp" />
     <ClInclude Include="AbstractResponseHandler.hpp" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="RouterInterface.hpp" />
     <ClInclude Include="SecureClient.hpp" />
     <ClInclude Include="SecureConnection.hpp" />
@@ -60,6 +62,12 @@
     <ClInclude Include="ListRouter.hpp" />
     <ClInclude Include="StringHelper.hpp" />
     <ClInclude Include="TsQueue.hpp" />
+    <ClInclude Include="WebComponent.h" />
+    <ClInclude Include="WebPageCodex.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FileHelper.cpp" />
+    <ClCompile Include="WebPageDeliverer.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
