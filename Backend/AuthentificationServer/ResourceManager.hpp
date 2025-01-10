@@ -7,6 +7,7 @@
 namespace ResourceManager {
 	typedef std::shared_ptr<HttpResponse> ResponsePtr;
 	typedef std::shared_ptr<HttpRequest> RequestPtr;
+
 	namespace Aux {
 		bool assignFieldValue(const char** dest, const rapidjson::Document& body, const char* field);
 	}

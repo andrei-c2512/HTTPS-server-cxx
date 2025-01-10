@@ -5,16 +5,15 @@
 class HttpHeaders {
 public:
 	HttpHeaders() 
-		:codex(HttpCommon::HeaderCodex::get())
 	{}
 
-	void add(const std::string& key, const std::string& val) {
-		auto header = codex.stringToHeader(key);
+	void add(const std::string_view key, const std::string_view val) {
+		auto header = HttpCommon::toHeader(key);
 		if (header != HttpCommon::Header::INVALID) {
-			_supportedMap.emplace(header, val);
+			_supportedMap.emplace(header, val.data());
 		}
 		else {
-			_unsupportedMap.emplace(key, val);
+			_unsupportedMap.emplace(key, val.data());
 		}
 	}
 	void add(HttpCommon::Header header, const std::string& val) {
@@ -29,7 +28,7 @@ public:
 		return _unsupportedMap;
 	}
 	static std::string headersToString(const HttpHeaders& headers) {
-		ConsoleLog::warning("Headers may not be shown in the way they were sent because the function shows\n"
+		ConsoleLog::warning("Headers may not be shown in the way they were sent because the function shows" 
 			"supported headers first and then the unsupported headers");
 
 		const std::map<HttpCommon::Header, std::string>& supportedMap = headers.supportedMap();
@@ -41,10 +40,10 @@ public:
 		std::string line;
 		line.reserve(avgLineLength);
 		for (const auto& [key, value] : supportedMap) {
-			std::string keyStr = HttpCommon::HeaderCodex::get().headerToString(key);
-			line.append(keyStr.begin(), keyStr.end());
+			std::string keyStr = HttpCommon::headerArr[(int)key].data();
+			line.append(keyStr);
 			line.append(":");
-			line.append(value.begin(), value.end());
+			line.append(value);
 			line.append("\n");
 
 			headerText.append(line);
@@ -52,9 +51,9 @@ public:
 		}
 
 		for (const auto& [key, value] : unsupportedMap) {
-			line.append(key.begin(), key.end());
+			line.append(key);
 			line.append(":");
-			line.append(value.begin(), value.end());
+			line.append(value);
 			line.append("\n");
 
 			headerText.append(line);
@@ -68,5 +67,4 @@ private:
 	static constexpr int32_t avgLineLength = 40;
 	std::map<HttpCommon::Header, std::string> _supportedMap;
 	std::map<std::string, std::string> _unsupportedMap;
-	HttpCommon::HeaderCodex& codex;
 };

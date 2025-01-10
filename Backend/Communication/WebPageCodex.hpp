@@ -1,6 +1,6 @@
 #pragma once
 #include "HttpCommon.hpp"
-#include "WebComponent.h"
+#include "WebComponent.hpp"
 
 //this class scans a folder and categorizes all of them by extension 
 namespace WebDelivery {
@@ -18,9 +18,10 @@ namespace WebDelivery {
 				for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
 					if (std::filesystem::is_regular_file(entry)) {
 						std::string fileName = entry.path().filename().string();
-
-						//auto format = FileHelper::getFileFormat(fileName);
 						
+						//auto format = FileHelper::fileFormatMap.at(fileName);
+						auto f = HttpCommon::headerMap.at("Accept");
+				
 					}
 				}
 			}

@@ -165,7 +165,7 @@
     <ClInclude Include="WebPageCodex.hpp">
       <Filter>Header Files\WebpageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="WebComponent.h">
+    <ClInclude Include="WebComponent.hpp">
       <Filter>Header Files\WebpageHandling</Filter>
     </ClInclude>
     <ClInclude Include="Algo.hpp">
@@ -187,6 +187,9 @@
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Common.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstexprMap.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>

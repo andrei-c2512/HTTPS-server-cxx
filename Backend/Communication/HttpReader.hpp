@@ -118,11 +118,11 @@ protected:
 	{
 		for (auto i = 0; i < buf.size(); i++) {
 			if (buf[i] == ':') {
-				std::string header = std::string(buf.begin(), buf.begin() + i);
-				std::string value = std::string(buf.begin() + i + 1, buf.end());
+				std::string_view header = std::string_view(buf.begin(), buf.begin() + i);
+				std::string_view value = std::string_view(buf.begin() + i + 1, buf.end());
 
-				if (HttpCommon::HeaderCodex::get().stringToHeader(header) == HttpCommon::Header::CONTENT_LENGTH)
-					jsonDocSize = stoi(std::string(value.begin(), value.end()));
+				if (HttpCommon::toHeader(header) == HttpCommon::Header::CONTENT_LENGTH)
+					jsonDocSize = std::stoi(value.data());
 
 				headers.add(header, value);
 				return;

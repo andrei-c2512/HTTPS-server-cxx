@@ -1,9 +1,9 @@
 #pragma once
-#include <string>
-#include <map>
+#include "ConstexprMap.hpp"
+#include <string_view>
 
 namespace FileHelper {
-	enum class FileFormat {
+	enum class FileFormat : size_t {
 		HTML,
 		CSS,
 		JAVA_SCRIPT,
@@ -26,15 +26,14 @@ namespace FileHelper {
 	constexpr CompressionType operator^(CompressionType lhs, CompressionType rhs);
 	constexpr CompressionType operator~(CompressionType lhs);
 
-	class FormatParser {
-	public:
-		FormatParser();
-		FileFormat get(const std::string& str) const noexcept;
-	private:
-		std::map<std::string, FileFormat> map;
+	inline ConstexprMap<std::string_view, FileFormat, (size_t)FileFormat::COUNT> fileFormatMap = {
+		{ std::make_pair<std::string_view , FileFormat>("html" , FileFormat::HTML)  ,
+		  std::make_pair<std::string_view , FileFormat>("css" , FileFormat::CSS),
+		  std::make_pair<std::string_view , FileFormat>("js" , FileFormat::JAVA_SCRIPT)
+		}
 	};
 
-	extern FormatParser formatParser;
+	FileFormat toFileExtension(const std::string_view fileName);
+	std::string_view getFileExtensionStr(const std::string_view fileName) noexcept;
 
-	FileFormat getFileFormat(const std::string& str) noexcept;
 }

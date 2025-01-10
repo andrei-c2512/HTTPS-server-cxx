@@ -27,6 +27,7 @@
     <ClInclude Include="ClientInterface.hpp" />
     <ClInclude Include="Common.hpp" />
     <ClInclude Include="BasicConnection.hpp" />
+    <ClInclude Include="ConstexprMap.hpp" />
     <ClInclude Include="DataFilters.hpp" />
     <ClInclude Include="FileHelper.hpp" />
     <ClInclude Include="HttpClient.hpp" />
@@ -62,7 +63,7 @@
     <ClInclude Include="ListRouter.hpp" />
     <ClInclude Include="StringHelper.hpp" />
     <ClInclude Include="TsQueue.hpp" />
-    <ClInclude Include="WebComponent.h" />
+    <ClInclude Include="WebComponent.hpp" />
     <ClInclude Include="WebPageCodex.hpp" />
   </ItemGroup>
   <ItemGroup>

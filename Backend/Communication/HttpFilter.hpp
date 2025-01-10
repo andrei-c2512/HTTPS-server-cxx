@@ -7,7 +7,6 @@
 class HttpFilter {
 public:
 	HttpFilter()
-		:ctCodex(HttpCommon::ContentTypeCodex::get())
 	{}
 	//returns the status code associated with the error that occurs. If there isn't any , then it return 100
 	[[nodiscard]] std::pair<HttpCommon::StatusCode, std::string> filter(const HttpHeaders& headers) {
@@ -59,19 +58,18 @@ private:
 			return std::make_pair(HttpCommon::StatusCode::BAD_REQUEST , "Did not find content type header");
 		else {
 			//mapping the extracted type to the content type
-			auto contentTypeMapIt = ctCodex.stringToType(it->second);
-			if (contentTypeMapIt == ctCodex.map.end()) {
+			auto contentType = HttpCommon::toContentType(it->second);
+			if (contentType == HttpCommon::ContentType::INVALID) {
 				return std::make_pair(HttpCommon::StatusCode::BAD_REQUEST,
-					"Invalid/badly formatted content type header. Available formats: " + ctCodex.availableFormatsString());
+					"Invalid/badly formatted content type header. ");
 			}
-			else if(contentTypeMapIt->second != contentType){
-				return std::make_pair(HttpCommon::StatusCode::BAD_REQUEST,
-					"Incorrect format");
+			else if (contentType != contentType) {
+				return std::make_pair(HttpCommon::StatusCode::BAD_REQUEST, "Incorrect format");
 			}
 			else {
 				return validResponse;
 			}
-
+			
 		}
 	}
 private:
@@ -82,6 +80,4 @@ private:
 
 	bool contentFilterEnabled = false;
 	HttpCommon::ContentType contentType = HttpCommon::ContentType::JSON;
-
-	HttpCommon::ContentTypeCodex& ctCodex;
 };

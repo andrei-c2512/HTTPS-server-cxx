@@ -5,18 +5,18 @@
 #include "StringHelper.hpp"
 #include "writer.h"
 #include "stringbuffer.h"
+#include "ConstexprMap.hpp"
 
 
 namespace HttpCommon {
 	enum class Header {
-		INVALID,
 		CONTENT_TYPE,
 		HOST,
 		CONTENT_LENGTH,
 		AUTHORIZATION,
 		ACCEPT,
-
-		COUNT
+		COUNT,
+		INVALID
 	};
 
 
@@ -30,7 +30,9 @@ namespace HttpCommon {
 		UPDATE,
 		CONNECT,
 		OPTIONS,
-		TRACE
+		TRACE,
+		COUNT,
+		INVALID
 	};
 
 	enum class ContentType {
@@ -38,12 +40,15 @@ namespace HttpCommon {
 		CSS,
 		HTML,
 		JAVA_SCRIPT,
-		COUNT
+		COUNT,
+		INVALID
 	};
 	enum class Version {
 		HTTP09,
 		HTTP10,
-		HTTP11
+		HTTP11,
+		COUNT,
+		INVALID
 	};
 
 	enum class StatusCode {
@@ -55,135 +60,59 @@ namespace HttpCommon {
 		UNAUTHORIZED = 401,
 		SERVER_ERROR = 500
 	};
+	typedef std::string_view str_v;
+	constexpr std::string_view headerArr[] = {str_v("Content-type") , str_v("Host") , str_v("Content-Length")  , str_v("Authorization") , str_v("Accept")};
+	constexpr std::string_view verbArr[] = { "GET" , "HEAD" , "POST" , "PUT" , "DELETE" , "UPDATE" , "CONNECT" , "OPTIONS" , "TRACE" };
+	constexpr std::string_view versionArr[] = { "HTTP/0.9" , "HTTP/1.0" , "HTTP/1.1" };
+	constexpr std::string_view contentTypeArr[] = { "application/json" , "text/css" , "text/html" , "text/javascript" };
 
-	class HeaderCodex {
-	public:
-		HeaderCodex& operator=(const HeaderCodex&) = delete;
-		HeaderCodex(const HeaderCodex&) = delete;
-		std::string headerToString(Header type) {
-			return headers[int(type)];
+	template <typename Enum>
+	constexpr std::array<std::pair<str_v, Enum>, size_t(Enum::COUNT)> generateMap(const std::string_view* beg) {
+		std::array<std::pair<str_v, Enum>, size_t(Enum::COUNT)> arr;
+		for (size_t i = 0; i < arr.size(); i++) {
+			arr[i] = std::make_pair(beg[i], (Enum)i);
 		}
-		Header stringToHeader(const std::string& arr) {
-			auto it = headerMap.find(arr);
-			if (it == headerMap.end()) {
-				return Header::INVALID;
-			}
-			else {
-				return it->second;
-			}
-		}
-		static HeaderCodex& get() {
-			static HeaderCodex h;
-			return h;
-		}
-	private:
-		HeaderCodex() {
-			headers = { "Content-type" , "Host" , "Content-Length" , "Authorization" };
+		return arr;
+	}
 
-			if (headers.size() != int(Header::COUNT))
-				ConsoleLog::warning("Not all headers are implemented in HttpCommon");
-
-			for (auto i = 0; i < headers.size(); i++) {
-				headerMap.emplace(headers[i], Header(i));
-			}
-		}
-		std::map<std::string, Header> headerMap;
-		std::vector<std::string> headers;
-	};
-
-	class VerbCodex {
-	public:
-		VerbCodex& operator=(const VerbCodex&) = delete;
-		VerbCodex(const VerbCodex&) = delete;
-		std::string verbToString(Verb type) {
-			return verbs[int(type)];
-		}
-		Verb stringToVerb(const std::string& arr) {
-			return verbMap[arr];
-		}
-		static VerbCodex& get() {
-			static VerbCodex h;
-			return h;
-		}
-	private:
-		VerbCodex() {
-			verbs = { "GET" , "HEAD" , "POST" , "PUT" , "DELETE" , "UPDATE" , "CONNECT" , "OPTIONS" , "TRACE" };
-
-			for (auto i = 0; i < verbs.size(); i++) {
-				verbMap.emplace(verbs[i], Verb(i));
-			}
-		}
-		std::map<std::string, Verb> verbMap;
-		std::vector<std::string> verbs;
-	};
-
-	class VersionCodex {
-	public:
-		VersionCodex& operator=(const VersionCodex&) = delete;
-		VersionCodex(const VersionCodex&) = delete;
-
-		std::string versionToString(Version version) {
-			return versions[int(version)];
-		}
-		Version stringToVersion(const std::string& arr) {
-			return versionMap[arr];
-		}
-
-		static VersionCodex& get() {
-			static VersionCodex h;
-			return h;
-		}
-	public:
-		Version defaultVersion = Version::HTTP11;
-	private:
-		VersionCodex() {
-
-			versions = { "HTTP/0.9" , "HTTP/1.0" , "HTTP/1.1" };
-			for (auto i = 0; i < versions.size(); i++) {
-				versionMap.emplace(versions[i], Version(i));
-			}
-		}
+	constexpr inline ConstexprMap<std::string_view, Header     , size_t(Header::COUNT)     > headerMap      = { generateMap<Header>(&headerArr[0])};
+	constexpr inline ConstexprMap<std::string_view, Verb       , size_t(Verb::COUNT)       > verbMap        = { generateMap<Verb>(&verbArr[0])};
+	constexpr inline ConstexprMap<std::string_view, Version    , size_t(Version::COUNT)    > versionMap     = { generateMap<Version>(&versionArr[0])};
+	constexpr inline ConstexprMap<std::string_view, ContentType, size_t(ContentType::COUNT)> contentTypeMap = { generateMap<ContentType>(&contentTypeArr[0])};
 
 
-		std::map<std::string, Version> versionMap;
-		std::vector<std::string> versions;
-	};
-
-	class ContentTypeCodex {
-	public:
-		ContentTypeCodex& operator=(const ContentTypeCodex&) = delete;
-		ContentTypeCodex(const ContentTypeCodex&) = delete;
-
-		std::string typeToString(ContentType version) {
-			return list[int(version)];
+	constexpr Header toHeader(const std::string_view str) noexcept {
+		auto it = headerMap.at(str);
+		if (it != headerMap.end()) {
+			return it->second;
 		}
-		auto stringToType(const std::string& arr) {
-			return map.find(arr);
+		else
+			return Header::INVALID;
+	}
+	constexpr Verb toVerb(const std::string_view str) noexcept {
+		auto it = verbMap.at(str);
+		if (it != verbMap.end()) {
+			return it->second;
 		}
-
-		static ContentTypeCodex& get() {
-			static ContentTypeCodex h;
-			return h;
+		else
+			return Verb::INVALID;
+	}
+	constexpr Version toVersion(const std::string_view str) noexcept {
+		auto it = versionMap.at(str);
+		if (it != versionMap.end()) {
+			return it->second;
 		}
-		std::map<std::string, ContentType> map;
-		std::vector<std::string> list;
-
-		const std::string& availableFormatsString() const noexcept {
-			return availableFormatsList;
+		else
+			return Version::INVALID;
+	}
+	constexpr ContentType toContentType(const std::string_view str) noexcept {
+		auto it = contentTypeMap.at(str);
+		if (it != contentTypeMap.end()) {
+			return it->second;
 		}
-	private:
-		ContentTypeCodex() {
-			list = { "application/json" , "text/css" , "text/html" , "text/javascript" };
-			for (int32_t i = 0; i < int(ContentType::COUNT) ; i++) {
-				map.emplace(list[i] , ContentType(i));
-				availableFormatsList.append(list[i]);
-				list[i].append(", ");
-			}
-			list.pop_back();
-			list.pop_back();
-		}
-		std::string availableFormatsList;
-	};
+		else
+			return ContentType::INVALID;
+	}
 
-
+	inline Version defaultVersion = Version::HTTP10;
 };

@@ -30,7 +30,7 @@ public:
 	}
 	HttpRequest(HttpCommon::Verb v, const std::string& URI0,
 		const HttpHeaders& headers0, rapidjson::Document d0, int32_t id = 0)
-		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(HttpCommon::VersionCodex::get().defaultVersion)
+		:HttpMessage(headers0, std::move(d0)), _verb(v), _URI(URI0), _version(HttpCommon::defaultVersion)
 	{
 		setUserId(id);
 	}
@@ -42,9 +42,9 @@ public:
 	}
 
 	static std::string requestFirstLine(HttpCommon::Verb verb , const std::string& URI  , HttpCommon::Version version) {
-		return HttpCommon::VerbCodex::get().verbToString(verb) + ' ' + 
+		return HttpCommon::verbArr[(int)verb].data() + ' ' +
 			URI + ' ' + 
-			HttpCommon::VersionCodex::get().versionToString(version) + '\n';
+			HttpCommon::versionArr[(int)version].data() + '\n';
 	}
 	HttpCommon::Verb verb() const noexcept { return _verb; }
 	const std::string& URI() const noexcept { return _URI; }

@@ -44,20 +44,20 @@ protected:
 	void processFirstLine(const std::string& buf) override {
 		int32_t last = 0;
 
-		std::vector<std::string> vec(3);
+		std::vector<std::string_view> vec(3);
 		int32_t j = 0, i = 0;
 		for (i = 0; i < buf.size(); i++) {
 			if (buf[i] == ' ') {
-				vec[j] = std::string(buf.begin() + last, buf.begin() + i);
+				vec[j] = std::string_view(buf.begin() + last, buf.begin() + i);
 				last = i + 1;
 				j++;
 			}
 		}
 		vec[j] = std::string(buf.begin() + last, buf.begin() + i);
 
-		_verb = HttpCommon::VerbCodex::get().stringToVerb(std::move(vec[0]));
+		_verb = HttpCommon::toVerb(std::move(vec[0]));
 		_URI = std::move(vec[1]);
-		_version = HttpCommon::VersionCodex::get().stringToVersion(std::move(vec[2]));
+		_version = HttpCommon::toVersion(std::move(vec[2]));
 	}
 protected:
 	HttpCommon::Verb _verb;

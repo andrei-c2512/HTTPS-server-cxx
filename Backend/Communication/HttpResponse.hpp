@@ -12,7 +12,7 @@ public:
 	}
 	HttpResponse(int32_t statusCode, const std::string& phrase,
 		const HttpHeaders& headers, rapidjson::Document d0 = {}, int32_t id = 0)
-		:HttpMessage(headers, std::move(d0)), _version(HttpCommon::VersionCodex::get().defaultVersion) , _statusCode(statusCode), _phrase(phrase)
+		:HttpMessage(headers, std::move(d0)), _version(HttpCommon::defaultVersion) , _statusCode(statusCode), _phrase(phrase)
 	{
 		setUserId(id);
 	}
@@ -25,7 +25,7 @@ public:
 	}
 
 	static std::string responseFirstLine(HttpCommon::Version version, int32_t statusCode, const std::string& phrase) {
-		return HttpCommon::VersionCodex::get().versionToString(version) + ' ' +
+		return HttpCommon::versionArr[(int)version].data() + ' ' +
 			std::to_string(statusCode) + ' ' + 
 			phrase + '\n';
 	}
