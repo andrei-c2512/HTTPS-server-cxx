@@ -30,7 +30,9 @@
     <ClInclude Include="ConstexprMap.hpp" />
     <ClInclude Include="DataFilters.hpp" />
     <ClInclude Include="FileHelper.hpp" />
+    <ClInclude Include="FileReader.hpp" />
     <ClInclude Include="HttpClient.hpp" />
+    <ClInclude Include="BaseHandlingContext.hpp" />
     <ClInclude Include="HttpHeaders.hpp" />
     <ClInclude Include="HttpMessage.hpp" />
     <ClInclude Include="HttpFilter.hpp" />
@@ -48,6 +50,7 @@
     <ClInclude Include="JWTvalidator.hpp" />
     <ClInclude Include="AbstractResponseHandler.hpp" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceHandler.hpp" />
     <ClInclude Include="RouterInterface.hpp" />
     <ClInclude Include="SecureClient.hpp" />
     <ClInclude Include="SecureConnection.hpp" />
@@ -62,6 +65,7 @@
     <ClInclude Include="HttpCommon.hpp" />
     <ClInclude Include="ListRouter.hpp" />
     <ClInclude Include="StringHelper.hpp" />
+    <ClInclude Include="StringViewArray.hpp" />
     <ClInclude Include="TsQueue.hpp" />
     <ClInclude Include="WebComponent.hpp" />
     <ClInclude Include="WebPageCodex.hpp" />

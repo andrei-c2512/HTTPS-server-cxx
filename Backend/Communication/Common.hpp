@@ -8,6 +8,8 @@
 #include <concepts>
 #include <assert.h>
 #include <thread>
+#include <queue>
+#include <stack>
 #include <deque>
 #include <mutex>
 #include <string_view>

@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <thread>
 #include "DataFilters.hpp"
+#include "StringViewArray.hpp"
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
     client.registerTest();
 
     ConsoleLog::info("Decoded shit: " + DataFilters::decodeBase64("SGVsbG8sIE9wZW5TU0wgaW4gQysrIQ=="));
+
     _getch();
     return 0;
 }

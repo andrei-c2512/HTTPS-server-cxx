@@ -10,8 +10,5 @@ protected:
 	void onNewMessage(std::shared_ptr<HttpRequest> req) override;
 	void initRouter() override;
 private:
-	JWT::Generator jwtGenerator;
-	JWT::Validator jwtValidator;
-	DatabaseHandler dbHandler;
-	WebDelivery::PageDeliverer webPageDeliverer;
+	ResourceHandling::HandlingContext ctx;
 };

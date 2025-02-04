@@ -25,7 +25,7 @@ public:
 	}
 
 	static std::string responseFirstLine(HttpCommon::Version version, int32_t statusCode, const std::string& phrase) {
-		return HttpCommon::versionArr[(int)version].data() + ' ' +
+		return HttpCommon::versionArr.copyAt((int8_t)version) + ' ' +
 			std::to_string(statusCode) + ' ' + 
 			phrase + '\n';
 	}
@@ -65,3 +65,5 @@ private:
 	int32_t _statusCode;
 	std::string _phrase;
 };
+
+typedef std::shared_ptr<HttpResponse> ResponsePtr;

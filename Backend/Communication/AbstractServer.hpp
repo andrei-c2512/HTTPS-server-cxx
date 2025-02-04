@@ -35,12 +35,15 @@ public:
 		ConsoleLog::message("Server started");
 	}
 	virtual void stop() {
-		onStop();
-		asioContext.stop();
+		if (stopped == false) {
+			onStop();
+			asioContext.stop();
 
-		if (contextThread.joinable()) contextThread.join();
+			if (contextThread.joinable()) contextThread.join();
 
-		ConsoleLog::message("Server stopped");
+			ConsoleLog::message("Server stopped");
+			stopped = true;
+		}
 	}
 	virtual void listen() {}
 
@@ -68,4 +71,5 @@ protected:
 	//the abort flag will be used by super classes when some condition for starting isn't met
 	// ex: failed to set certificate for a secure server
 	bool abort = false;
+	bool stopped = false;
 };

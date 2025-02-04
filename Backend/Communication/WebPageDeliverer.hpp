@@ -5,8 +5,8 @@
 namespace WebDelivery {
 	class PageDeliverer {
 	public:
-		PageDeliverer(const std::string& webFolderPath)
-			:codex(webFolderPath)
+		PageDeliverer(const std::string& storagePath , const std::string& webFolderPath )
+			:codex(storagePath , webFolderPath)
 		{}
 		std::string getFile(std::string_view fileName, std::vector<FileHelper::CompressionType> supported = { FileHelper::CompressionType::NONE}) {
 			file.open(fileName.data());

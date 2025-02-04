@@ -131,17 +131,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="AuthHandling.cpp" />
-    <ClCompile Include="Auxiliary.cpp" />
     <ClCompile Include="DashHandling.cpp" />
     <ClCompile Include="DatabaseHandler.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="HandlingContext.cpp" />
     <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DatabaseHandler.hpp" />
     <ClInclude Include="HandlingContext.hpp" />
-    <ClInclude Include="ResourceManager.hpp" />
+    <ClInclude Include="RegisterHandler.hpp" />
+    <ClInclude Include="ResourceHandlingUtility.hpp" />
     <ClInclude Include="Server.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

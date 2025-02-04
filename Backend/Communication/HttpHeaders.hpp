@@ -1,7 +1,6 @@
 #pragma once
 #include "HttpCommon.hpp"
 
-
 class HttpHeaders {
 public:
 	HttpHeaders() 
@@ -40,7 +39,7 @@ public:
 		std::string line;
 		line.reserve(avgLineLength);
 		for (const auto& [key, value] : supportedMap) {
-			std::string keyStr = HttpCommon::headerArr[(int)key].data();
+			std::string keyStr = HttpCommon::headerArr.copyAt((int8_t)key);
 			line.append(keyStr);
 			line.append(":");
 			line.append(value);

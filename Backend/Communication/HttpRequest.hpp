@@ -1,7 +1,6 @@
 #pragma once
 #include "HttpMessage.hpp"
 
-
 class HttpRequest : public HttpMessage {
 public:
 	HttpRequest() = default;
@@ -42,9 +41,9 @@ public:
 	}
 
 	static std::string requestFirstLine(HttpCommon::Verb verb , const std::string& URI  , HttpCommon::Version version) {
-		return HttpCommon::verbArr[(int)verb].data() + ' ' +
+		return HttpCommon::verbArr.copyAt((int8_t)verb) + ' ' +
 			URI + ' ' + 
-			HttpCommon::versionArr[(int)version].data() + '\n';
+			HttpCommon::versionArr.copyAt((int8_t)version) + '\n';
 	}
 	HttpCommon::Verb verb() const noexcept { return _verb; }
 	const std::string& URI() const noexcept { return _URI; }
@@ -83,3 +82,4 @@ private:
 	HttpCommon::Version _version;
 };
 
+typedef std::shared_ptr<HttpRequest> RequestPtr;

@@ -12,9 +12,26 @@ namespace JWT{
 			publicKey = PEM_read_PUBKEY(file, nullptr, nullptr, nullptr);
 			fclose(file);
 		}
-		Validator() {
+		~Validator() {
 			if (publicKey)
 				EVP_PKEY_free(publicKey);
+			if(context)
+				EVP_MD_CTX_free(context);
+		}
+		Validator(const Validator& val) = delete;
+		Validator& operator=(const Validator& val) = delete;
+		Validator(Validator&& val) {
+			publicKey = val.publicKey;
+			context = val.context;
+			val.publicKey = nullptr;
+			val.context = nullptr;
+		}
+		Validator& operator=(Validator&& val) {
+			publicKey = val.publicKey;
+			context = val.context;
+			val.publicKey = nullptr;
+			val.context = nullptr;
+			return *this;
 		}
 		void setJWT(const std::string_view& jwt0) {
 			jwt = jwt0;

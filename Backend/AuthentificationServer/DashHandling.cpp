@@ -1,5 +1,6 @@
-#include "ResourceManager.hpp"
 
+
+/*
 ResourceManager::ResponsePtr ResourceManager::Dash::GET_dash(RequestPtr request) {
 	HttpHeaders headers;
 	headers.add(HttpCommon::Header::CONTENT_TYPE, "json");
@@ -9,3 +10,4 @@ ResourceManager::ResponsePtr ResourceManager::Dash::GET_dash(RequestPtr request)
 	auto response = std::make_shared<HttpResponse>(200, "OK", std::move(headers));
 	return response;
 }
+*/

@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{d88a71cc-076d-4f34-ae72-3f48c27da8fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\FileReading">
+      <UniqueIdentifier>{e30e6662-6dd9-4cbe-9f54-34f942564f42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpCommon.hpp">
@@ -191,6 +194,18 @@
     </ClInclude>
     <ClInclude Include="ConstexprMap.hpp">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceHandler.hpp">
+      <Filter>Header Files\Routing</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseHandlingContext.hpp">
+      <Filter>Header Files\Routing</Filter>
+    </ClInclude>
+    <ClInclude Include="StringViewArray.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.hpp">
+      <Filter>Header Files\Utility\FileReading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

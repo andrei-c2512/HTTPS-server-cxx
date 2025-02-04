@@ -19,6 +19,8 @@ protected:
 		auto result = httpFilter.filter(message->headers());
 		std::shared_ptr<HttpResponse> response;
 		if (result.first == HttpCommon::StatusCode::CONTINUE) {
+
+			//TO DO: make some sort of class that specifies the requirments for the response(e.g. Accepted formats , encodings etc)
 			response = router->handleRequest(message);
 		}
 		else {

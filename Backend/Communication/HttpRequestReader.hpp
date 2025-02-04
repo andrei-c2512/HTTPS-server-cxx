@@ -44,11 +44,11 @@ protected:
 	void processFirstLine(const std::string& buf) override {
 		int32_t last = 0;
 
-		std::vector<std::string_view> vec(3);
+		std::vector<std::string> vec(3);
 		int32_t j = 0, i = 0;
 		for (i = 0; i < buf.size(); i++) {
 			if (buf[i] == ' ') {
-				vec[j] = std::string_view(buf.begin() + last, buf.begin() + i);
+				vec[j] = std::string(buf.begin() + last, buf.begin() + i);
 				last = i + 1;
 				j++;
 			}

@@ -6,6 +6,7 @@
 #include "writer.h"
 #include "stringbuffer.h"
 #include "ConstexprMap.hpp"
+#include "StringViewArray.hpp"
 
 
 namespace HttpCommon {
@@ -18,23 +19,23 @@ namespace HttpCommon {
 		COUNT,
 		INVALID
 	};
-
-
 	enum class Verb {
 		GET,
-		HEAD,
 		POST,
-		PUT,
 		//added _ cause there is a macro called DELETE , bruh
 		_DELETE,
 		UPDATE,
+		COUNT,
+
+		//these are more or less , auxiliary
+		HEAD,
+		PUT,
 		CONNECT,
 		OPTIONS,
 		TRACE,
-		COUNT,
+		COUNT_ALL,
 		INVALID
 	};
-
 	enum class ContentType {
 		JSON,
 		CSS,
@@ -50,7 +51,6 @@ namespace HttpCommon {
 		COUNT,
 		INVALID
 	};
-
 	enum class StatusCode {
 		INVALID,
 		CONTINUE = 100,
@@ -61,13 +61,14 @@ namespace HttpCommon {
 		SERVER_ERROR = 500
 	};
 	typedef std::string_view str_v;
-	constexpr std::string_view headerArr[] = {str_v("Content-type") , str_v("Host") , str_v("Content-Length")  , str_v("Authorization") , str_v("Accept")};
-	constexpr std::string_view verbArr[] = { "GET" , "HEAD" , "POST" , "PUT" , "DELETE" , "UPDATE" , "CONNECT" , "OPTIONS" , "TRACE" };
-	constexpr std::string_view versionArr[] = { "HTTP/0.9" , "HTTP/1.0" , "HTTP/1.1" };
-	constexpr std::string_view contentTypeArr[] = { "application/json" , "text/css" , "text/html" , "text/javascript" };
+	
+	constexpr StringViewArray<size_t(Header::COUNT)> headerArr = { "Content-type" , "Host" , "Content-Length"  ,"Authorization" , "Accept" };
+	constexpr StringViewArray<size_t(Verb::COUNT)> verbArr = { "GET" , "POST" ,"DELETE" , "UPDATE" };
+	constexpr StringViewArray<size_t(Version::COUNT)> versionArr = { "HTTP/0.9" , "HTTP/1.0" , "HTTP/1.1" };
+	constexpr StringViewArray<size_t(ContentType::COUNT)> contentTypeArr = { "application/json" , "text/css" , "text/html" , "text/javascript" };
 
 	template <typename Enum>
-	constexpr std::array<std::pair<str_v, Enum>, size_t(Enum::COUNT)> generateMap(const std::string_view* beg) {
+	constexpr std::array<std::pair<str_v, Enum>, size_t(Enum::COUNT)> generateMap(const std::array<std::string_view , size_t(Enum::COUNT)>& beg) {
 		std::array<std::pair<str_v, Enum>, size_t(Enum::COUNT)> arr;
 		for (size_t i = 0; i < arr.size(); i++) {
 			arr[i] = std::make_pair(beg[i], (Enum)i);
@@ -75,10 +76,10 @@ namespace HttpCommon {
 		return arr;
 	}
 
-	constexpr inline ConstexprMap<std::string_view, Header     , size_t(Header::COUNT)     > headerMap      = { generateMap<Header>(&headerArr[0])};
-	constexpr inline ConstexprMap<std::string_view, Verb       , size_t(Verb::COUNT)       > verbMap        = { generateMap<Verb>(&verbArr[0])};
-	constexpr inline ConstexprMap<std::string_view, Version    , size_t(Version::COUNT)    > versionMap     = { generateMap<Version>(&versionArr[0])};
-	constexpr inline ConstexprMap<std::string_view, ContentType, size_t(ContentType::COUNT)> contentTypeMap = { generateMap<ContentType>(&contentTypeArr[0])};
+	constexpr ConstexprMap<std::string_view, Header     , size_t(Header::COUNT)     > headerMap      = { generateMap<Header>(headerArr.arr)};
+	constexpr ConstexprMap<std::string_view, Verb       , size_t(Verb::COUNT)       > verbMap        = { generateMap<Verb>(verbArr.arr)};
+	constexpr ConstexprMap<std::string_view, Version    , size_t(Version::COUNT)    > versionMap     = { generateMap<Version>(versionArr.arr)};
+	constexpr ConstexprMap<std::string_view, ContentType, size_t(ContentType::COUNT)> contentTypeMap = { generateMap<ContentType>(contentTypeArr.arr)};
 
 
 	constexpr Header toHeader(const std::string_view str) noexcept {

@@ -5,7 +5,7 @@
 #include "openssl/hmac.h"
 #include "openssl/rsa.h"
 #include "openssl/evp.h"
-
+#include "ConsoleLog.hpp"
 namespace JWT {
 	class Generator {
 	public:
@@ -23,6 +23,24 @@ namespace JWT {
 			if (context)
 				EVP_MD_CTX_free(context);
 		}
+		Generator(const Generator& gen) = delete;
+		Generator& operator=(const Generator& gen) = delete;
+		Generator(Generator&& gen) {
+			privateKey = gen.privateKey;
+			context = gen.context;
+			gen.privateKey = nullptr;
+			gen.context = nullptr;
+		}
+		Generator& operator=(Generator&& gen) {
+			privateKey = gen.privateKey;
+			context = gen.context;
+			gen.privateKey = nullptr;
+			gen.context = nullptr;
+			return *this;
+		}
+
+
+
 		static rapidjson::Document createHeader() {
 			rapidjson::Document header;
 			header.SetObject();
