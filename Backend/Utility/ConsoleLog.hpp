@@ -55,7 +55,8 @@ public:
 		return nextSequence;
 	}
 	//returns true on error
-	static bool handleError(asio::error_code& ec, const std::string_view sucessMsg , const std::string& errorMsg) {
+	template<typename Exception>
+	static bool handleError(Exception& ec, const std::string_view sucessMsg , const std::string& errorMsg) {
 		if (!ec) {
 			ConsoleLog::info(sucessMsg);
 			return false;

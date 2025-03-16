@@ -49,12 +49,6 @@
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{cff1c1f3-2fca-4a4b-9be5-2c184217d8ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utility">
-      <UniqueIdentifier>{d88a71cc-076d-4f34-ae72-3f48c27da8fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utility\FileReading">
-      <UniqueIdentifier>{e30e6662-6dd9-4cbe-9f54-34f942564f42}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpCommon.hpp">
@@ -171,28 +165,10 @@
     <ClInclude Include="WebComponent.hpp">
       <Filter>Header Files\WebpageHandling</Filter>
     </ClInclude>
-    <ClInclude Include="Algo.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="DataFilters.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="StringHelper.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="FileHelper.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="TsQueue.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleLog.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Common.hpp">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstexprMap.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="ResourceHandler.hpp">
@@ -201,19 +177,19 @@
     <ClInclude Include="BaseHandlingContext.hpp">
       <Filter>Header Files\Routing</Filter>
     </ClInclude>
-    <ClInclude Include="StringViewArray.hpp">
+    <ClInclude Include="DataCompressor.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="FileReader.hpp">
-      <Filter>Header Files\Utility\FileReading</Filter>
+    <ClInclude Include="WebLogisticsHandler.hpp">
+      <Filter>Header Files\WebpageHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="WebResourceGenerator.h">
+      <Filter>Header Files\WebpageHandling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WebPageDeliverer.hpp">
       <Filter>Header Files\WebpageHandling</Filter>
-    </ClCompile>
-    <ClCompile Include="FileHelper.cpp">
-      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,8 +8,11 @@ public:
 	FileReader(const std::string& rootFolder) {
 		_path = rootFolder;
 	}
+	FileReader(const std::filesystem::path& path) {
+		_path = path;
+	}
 	//reads a file from the current directory
-	std::string readFile() noexcept {
+	[[nodiscard]] std::string readFile() noexcept {
 		file.open(_path , std::ios::binary | std::ios::ate);
 		if (!file) {
 			ConsoleLog::error("Failed to open file");
@@ -18,14 +21,16 @@ public:
 		file.seekg(0, std::ios::beg);
 		
 		std::string buffer;
+		buffer.reserve(fileSize);
 		if (!file.read(buffer.data(), fileSize)) {
 			ConsoleLog::error("Failed to read the file");
 		}
 		
+		file.close();
 		return buffer;
 	}
 
-	std::string readFile(const std::string_view path) noexcept {
+	[[nodiscard]] std::string readFile(const std::string_view path) noexcept {
 		_path = path;
 		return readFile();
 	}

@@ -23,14 +23,11 @@
     <ClInclude Include="AbstractConnection.hpp" />
     <ClInclude Include="AbstractServer.hpp" />
     <ClInclude Include="BasicServer.hpp" />
-    <ClInclude Include="Algo.hpp" />
     <ClInclude Include="ClientInterface.hpp" />
     <ClInclude Include="Common.hpp" />
     <ClInclude Include="BasicConnection.hpp" />
-    <ClInclude Include="ConstexprMap.hpp" />
+    <ClInclude Include="DataCompressor.hpp" />
     <ClInclude Include="DataFilters.hpp" />
-    <ClInclude Include="FileHelper.hpp" />
-    <ClInclude Include="FileReader.hpp" />
     <ClInclude Include="HttpClient.hpp" />
     <ClInclude Include="BaseHandlingContext.hpp" />
     <ClInclude Include="HttpHeaders.hpp" />
@@ -49,6 +46,7 @@
     <ClInclude Include="JWTgenerator.hpp" />
     <ClInclude Include="JWTvalidator.hpp" />
     <ClInclude Include="AbstractResponseHandler.hpp" />
+    <ClInclude Include="WebLogisticsHandler.hpp" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceHandler.hpp" />
     <ClInclude Include="RouterInterface.hpp" />
@@ -56,7 +54,6 @@
     <ClInclude Include="SecureConnection.hpp" />
     <ClInclude Include="SecureServer.hpp" />
     <ClInclude Include="ServerConnectionList.hpp" />
-    <ClInclude Include="ConsoleLog.hpp" />
     <ClInclude Include="HttpClientConnection.hpp" />
     <ClInclude Include="HttpReader.hpp" />
     <ClInclude Include="HttpServerConnection.hpp" />
@@ -64,14 +61,11 @@
     <ClInclude Include="MessageReader.hpp" />
     <ClInclude Include="HttpCommon.hpp" />
     <ClInclude Include="ListRouter.hpp" />
-    <ClInclude Include="StringHelper.hpp" />
-    <ClInclude Include="StringViewArray.hpp" />
-    <ClInclude Include="TsQueue.hpp" />
     <ClInclude Include="WebComponent.hpp" />
     <ClInclude Include="WebPageCodex.hpp" />
+    <ClInclude Include="WebResourceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileHelper.cpp" />
     <ClCompile Include="WebPageDeliverer.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -172,7 +166,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)asio-1.30.2\include;$(SolutionDir)rapidjson-master\include\rapidjson</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)asio-1.30.2\include;$(SolutionDir)Utility;$(SolutionDir)rapidjson-master\include\rapidjson</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

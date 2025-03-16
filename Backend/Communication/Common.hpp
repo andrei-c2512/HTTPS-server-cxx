@@ -6,17 +6,7 @@
 #include <array>
 #include <string>
 #include <concepts>
-#include <assert.h>
-#include <thread>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <mutex>
-#include <string_view>
-#include <type_traits>
-#include <functional>
-#include <fstream>
-#include <filesystem>
+#include "Common.hpp"
 #include "asio.hpp"
 #include "asio/ssl.hpp"
 
@@ -28,3 +18,6 @@ concept IsSocket = std::is_base_of_v<T, asio::ip::tcp::socket> ||       //checki
 typedef std::vector<char> ByteArray;
 typedef asio::ip::tcp::socket BasicSocket;
 typedef asio::ssl::stream<asio::ip::tcp::socket> SslSocket;
+
+
+#define WEBPROJ_CLEANUP_ENABLED true

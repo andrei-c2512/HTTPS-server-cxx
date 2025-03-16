@@ -25,7 +25,7 @@ namespace JWT {
 		}
 		Generator(const Generator& gen) = delete;
 		Generator& operator=(const Generator& gen) = delete;
-		Generator(Generator&& gen) {
+		Generator(Generator&& gen) noexcept {
 			privateKey = gen.privateKey;
 			context = gen.context;
 			gen.privateKey = nullptr;
@@ -38,8 +38,6 @@ namespace JWT {
 			gen.context = nullptr;
 			return *this;
 		}
-
-
 
 		static rapidjson::Document createHeader() {
 			rapidjson::Document header;

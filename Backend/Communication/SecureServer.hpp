@@ -15,6 +15,7 @@ public:
 
 		asio::error_code ec;
 		sslContext.use_certificate_chain_file(certFile , ec);
+	
 		abort = abort || ConsoleLog::handleError(ec, "Sucessfully loaded certificate file", "Failed to load certificate file");
 
 		sslContext.use_private_key_file(keyFile, asio::ssl::context::pem , ec);

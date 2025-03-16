@@ -13,11 +13,11 @@ namespace FileHelper {
 	};
 
 	enum class CompressionType {
-		NONE = 1 << 0,
-		HUFFMAN = 1 << 1,
-		GZIP = 1 << 2,
-		ZIP = 1 << 3,
-		BROTLI = 1 << 4 ,
+		NONE ,
+		HUFFMAN ,
+		GZIP ,
+		ZIP ,
+		BROTLI ,
 		COUNT = 5
 	};
 
@@ -49,7 +49,7 @@ namespace FileHelper {
 	inline std::string_view getFileExtensionStr(const std::string_view fileName) noexcept;
 	inline std::string fileExtensionString(const std::filesystem::path& path) noexcept {
 		std::string str = path.string();
-		return str.substr(str.rfind('.'));;
+		return str.substr(str.rfind('.') + 1);
 	}
 
 }

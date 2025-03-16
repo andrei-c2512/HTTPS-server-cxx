@@ -2,8 +2,8 @@
 #include "HttpCommon.hpp"
 #include "WebComponent.hpp"
 #include "FileHelper.hpp"
+#include "WebLogisticsHandler.hpp"
 
-#define CLEAN_UP_ENABLED true
 
 //this class scans a folder with all of the web page files
 //it then creates a separate folders of the same web page files but with different compressions
@@ -12,66 +12,10 @@ namespace WebDelivery {
 	public:
 		//needs the path to where it can create folders to store stuff and a folder of the original stuff
 		PageCodex(const std::string& storagePath , const std::string& webFolder)
-			:storageDir(storagePath) , projectDir(webFolder)
+			:storageDir(storagePath) , projectDir(webFolder) , handler(storagePath , webFolder)
 		{
 			assert(validDir(storageDir));
 			assert(validDir(projectDir));
-			makeDirectories();
-			capturePaths();
-		}
-
-		//this preprocessor shi is temporary
-#if CLEAN_UP_ENABLED 
-		~PageCodex() {
-			cleanUp();
-		}
-#else
-		~PageCodex() = default;
-#endif
-
-		//create the folders for the supported compression algorhitms
-		void makeDirectories() const noexcept{
-			std::filesystem::path storageFolderPath = storageDir;
-			for (const std::string_view folder : FileHelper::compressionNameArr.arr) {
-				std::filesystem::path folderPath = storageFolderPath.append(std::string(folder.data()));
-				storageFolderPath = storageDir;
-
-				ConsoleLog::info(folderPath.string());
-				if (!std::filesystem::exists(folderPath))
-				{
-					std::filesystem::create_directory(folderPath);
-					ConsoleLog::info("Created directory <" + std::string(folder.data()) + ">");
-				}
-			}
-			ConsoleLog::info("Made/verrified necessary directories for web delivery");
-		}
-		//initialises the project paths
-		void capturePaths() {
-			std::queue<std::filesystem::path> dirQueue;
-			dirQueue.emplace(projectDir);
-
-			while (dirQueue.empty() == false) {
-				const auto& dir = dirQueue.front();
-				for (const auto& entry : std::filesystem::directory_iterator(dir)) {
-					const auto& path = entry.path();
-					if (std::filesystem::is_regular_file(path) == false) {
-						continue;
-					}
-
-					auto extensionType = FileHelper::toFileExtension(FileHelper::fileExtensionString(path));
-					if (extensionType != FileHelper::FileFormat::INVALID) {
-						filePathList.emplace_back(path);
-					}
-					else if (std::filesystem::is_directory(path))
-						dirQueue.push(path);
-				}
-				dirQueue.pop();
-			}
-			nProjectFiles = filePathList.size();
-		
-			for (const std::filesystem::path& p : filePathList) {
-				ConsoleLog::info(p.string());
-			}
 		}
 		//returns empty string if not found
 		std::string getPage(const std::string& fileName, FileHelper::FileFormat format) {
@@ -81,14 +25,15 @@ namespace WebDelivery {
 		static bool validDir(const std::string_view path) {
 			return std::filesystem::exists(path) && std::filesystem::is_directory(path);
 		}
-		void cleanUp() noexcept {
-			for (const auto& entry : std::filesystem::directory_iterator(storageDir)) {
-				const auto& path = entry.path();
-				if (std::filesystem::remove_all(entry) == true) {
-					ConsoleLog::info("Deleted directory");
-				}
-			}
-		}
+
+		//I need to think of a way to map a file name to a specific path. Ofc I could use maps but that would be MID
+		//maybe I can generate code?
+		//hmm
+		
+		/*
+			Obiectivul ar fi urmatorul , la compile time , sa asocieze fiecarei apel a unei pagini 
+			
+		*/
 	private:
 		std::string storageDir;	
 		std::string projectDir;
@@ -98,5 +43,6 @@ namespace WebDelivery {
 		//the relative path list to the requested resource files( .png , .gif , .mp4 etc)
 		std::vector<std::filesystem::path> resourcePathList;
 		size_t nProjectFiles = 0;
+		LogisticsHandler handler;
 	};
 }
